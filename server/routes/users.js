@@ -8,7 +8,7 @@ router.post('/register',UserController.register);
 router.post('/login',UserController.login);
 router.get('/profile',verifyToken,UserController.profile);
 
-router.delete();
+// router.delete();
 
 function verifyToken(req,res,next){
   const bearerHeader=req.headers['authorization'];
@@ -24,3 +24,5 @@ next();
     res.sendStatus(403);
   }
 }
+
+module.exports=router

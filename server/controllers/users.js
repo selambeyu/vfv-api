@@ -6,7 +6,7 @@ const passport =require('passport');
 const jwt=require('jsonwebtoken');
 router.use(passport.initialize());
 router.use(passport.session());
-const User=require('../models/users');
+const user=require('../models/users');
 //const db=require('../config/db_connection');
 const config=require('../config/config');
 
@@ -14,7 +14,7 @@ const config=require('../config/config');
 //require('../config/passport')(passport);
 
 module.exports.register=(req,res)=>{
-  let newUser=new User({
+  let newUser=new user({
     firstname:req.body.firstname,
     lastname:req.body.lastname,
     username:req.body.username,
