@@ -1,3 +1,4 @@
+
 const ProfesionalModel=require('../models/professional');
 
 module.exports={

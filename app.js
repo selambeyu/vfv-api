@@ -14,7 +14,7 @@ const database=require('./server/config/db_connection')
 var usersRouter = require('./server/routes/users');
 var adminRouter=require('./server/routes/admin');
 var articleRouter=require('./server/routes/article');
-var profesionalRouter=require('./server/controllers/professionals')
+var profesionalRouter=require('./server/routes/professional')
 
 // create a custom middleware
 const checkuserType=function(req,res,next){
