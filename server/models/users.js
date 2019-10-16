@@ -68,7 +68,7 @@ module.exports.addUser=function(newUser,callback){
 
 module.exports.comparePassword=function(password,hash,callback){
     bcrypt.compare(password,hash,(err,isMatch)=>{
-        if(err)throw err;
+        if(err) throw err;
         callback(null,isMatch);
     });
 }

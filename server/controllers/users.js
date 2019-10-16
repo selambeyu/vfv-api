@@ -1,5 +1,5 @@
-const User =require('../services/users');
-
+// const User =require('../services/users');
+const bcrypt=require('bcryptjs')
 const express = require('express');
 const router = express.Router();
 const passport =require('passport');
@@ -19,51 +19,87 @@ module.exports.register=(req,res)=>{
     lastname:req.body.lastname,
     username:req.body.username,
     email:req.body.email,
-    password:req.body.password
+    password:req.body.password,
+    role:req.body.role
 
   });
-  User.addUser(newUser,(err,user)=>{
-    if(err){
-      let message='';
-      if(err.errors.username)messsage="Username is alredy taken  ";
-      if(err.errors.email)message +="Email alredy exits";
-      return res.json({
-        success:false,
-        message
-      });
-    } else {
-      return res.json({
-        success:true,
-        message:"User is registered succesfully"
-      });
-    }
-  });
+  bcrypt.genSalt(10,(err,salt)=>{
+    bcrypt.hash(newUser.password,salt,(err,hash)=>{
+        if(err)return err;
+        newUser.password=hash;
+        newUser.save().then(result=>{
+            res.json({success:true,result:result}).catch(err=>{
+                res.json({success:false,result:err})
+            })
+        })
+    });
+});
+  
 };
 
+// bcrypt.compare(password,hash,(err,isMatch)=>{
+//     if(err) throw err;
+//     callback(null,isMatch);
+// });
 
 
+
+// module.exports.login=(req,res)=>{
+//   const username=req.body.username;
+//   const password=req.body.password;
+//   user.findOne({"username":username}).then(result=>{
+//     bcrypt.compare(password,hash,(err,isMatch)=>{
+//         if(err)throw err;
+//         if(isMatch){
+//           const token=jwt.sign({
+          
+//             data:{
+//               _id:user._id,
+//               firstname:user.firstname,
+//               username:user.username,
+//               lastname:user.lastname,
+//               email:user.email,
+//               role:"admin"
+              
+  
+//             }
+//           },config.secret,{
+//             expiresIn:604880
+//           }
+  
+//           );
+//           return res.json({
+//             success:true,
+//             token:token
+//           });
+//         }else{
+//           return res.json({
+//             success:true,
+//             message:"Wrong password"
+//           })
+//         }
+//       });
+//     res.json({success:true,result:result})
+// }).catch(err=>{
+//     res.json(({success:false,result:err}))
+// })
+ 
+//   };
 module.exports.login=(req,res)=>{
-  const username=req.body.username;
-  const password=req.body.password;
-  User.getUserByUsername(username,(err,user)=>{
+  user.findOne({username:req.body.username},(err,user)=>{
     if(err)throw err;
-    if(!user){
-      return res.json({
-        success:false,
-
-      });
-    }
-    User.comparePassword(password,user.password,(err,isMatch)=>{
+    bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
       if(err)throw err;
       if(isMatch){
         const token=jwt.sign({
-        role:"user",
+          
           data:{
             _id:user._id,
             firstname:user.firstname,
             username:user.username,
             lastname:user.lastname,
             email:user.email,
+            role:"admin"
             
 
           }
@@ -76,15 +112,14 @@ module.exports.login=(req,res)=>{
           success:true,
           token:token
         });
+
       }else{
-        return res.json({
-          success:true,
-          message:"Wrong password"
-        })
+        return res.json({success:false,message:"Wrong password"})
       }
-    });
-  });
-};
+
+    })
+  })
+}
 
 
 // /get authenticated user profile

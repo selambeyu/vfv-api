@@ -1,4 +1,4 @@
 module.exports={
-    database:'mongodb://localhost/vfv_DB',
+    database:'mongodb://localhost/vfvDB',
     secret:"Mysecret"
 }
