@@ -16,12 +16,12 @@ const UserSchema=mongoose.Schema({
     },
     username:{
         type:String,
-        unique:true,
+        // unique:true,
         required:true
     },
     email:{
         type:String,
-        unique:true,
+        // unique:true,
         index:true,
         required:true
     },

@@ -32,6 +32,10 @@ const ProfessionalSchema=mongoose.Schema({
     profilePicture:{
         type:String,
 
+    },
+    isVerified:{
+        type:Boolean,
+        default:false
     }
 });
 
