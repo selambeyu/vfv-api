@@ -57,33 +57,22 @@ module.exports.login=(req,res)=>{
     bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
       if(err)throw err;
       if(isMatch){
-        const token=jwt.sign({
-          
-          data:{
-            _id:user._id,
-            firstname:user.firstname,
-            username:user.username,
-            lastname:user.lastname,
-            email:user.email,
-            role:user.role
-            
-
-          }
-        },config.secret,{
-          expiresIn:604880
+        const token=jwt.sign({user:user},config.secret,{expiresIn:604880})
+       
+        // return res.json({success:true,token:token})
+        if(user.role=="professional"){
+          return res.json({
+            success:true,
+            token:token,
+            message:"Professional loged in"
+          });
+        }else{
+          return res.json({
+            succes:true,
+            token:token,
+            message:"Student log in"
+          })
         }
-
-        );
-        return res.json({success:true,token:token})
-      //   if(req.body.role=="professional"){
-      //     return res.json({
-      //       success:true,
-      //       token:token,
-      //       message:"Professional loged in"
-      //     });
-      //   }else{
-      //     return res.json({succes:false,token:token,message:"Student loged in"})
-      //   }
 
       }else{
         return res.json({success:false,message:"Wrong password"})
@@ -97,15 +86,24 @@ module.exports.login=(req,res)=>{
 // /get authenticated user profile
 
 module.exports.profile=(req,res)=>{
-  console.log(req.user);
+  // console.log(req.user);
   jwt.verify(req.token,config.secret,(err,authData)=>{
     if(err){
       res.sendStatus(403);
     }else{
-      res.json({
-        message:"user profile",
-        authData
-      })
+      if(authData.role!="professional"){
+        res.json({
+          message:"user profile",
+          authData
+        });
+      }
+      else{
+        res.json({
+          message:"Professional profile",
+          authData
+        });
+      }
+      
     }
   })
   
