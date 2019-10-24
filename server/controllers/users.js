@@ -4,13 +4,13 @@ const express = require('express');
 const router = express.Router();
 const passport =require('passport');
 const jwt=require('jsonwebtoken');
-const nodemailer=require('nodemailer')
+// const nodemailer=require('nodemailer')
 router.use(passport.initialize());
 router.use(passport.session());
 const user=require('../models/users');
 //const db=require('../config/db_connection');
 const config=require('../config/config');
-const Token=require('../models/token')
+// const Token=require('../models/token')
 
 /*  */
 //require('../config/passport')(passport);
@@ -57,6 +57,7 @@ module.exports.login=(req,res)=>{
     bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
       if(err)throw err;
       if(isMatch){
+        
         const token=jwt.sign({user:user},config.secret,{expiresIn:604880})
        
         // return res.json({success:true,token:token})
@@ -66,13 +67,21 @@ module.exports.login=(req,res)=>{
             token:token,
             message:"Professional loged in"
           });
-        }else{
+        }
+        if(user.role=="student"){
           return res.json({
-            succes:true,
+            success:true,
             token:token,
-            message:"Student log in"
+            message:"Stuent log"
           })
         }
+        // else{
+        //   return res.json({
+        //     succes:true,
+        //     token:token,
+        //     message:"Student log in"
+        //   })
+        // }
 
       }else{
         return res.json({success:false,message:"Wrong password"})
@@ -108,6 +117,25 @@ module.exports.profile=(req,res)=>{
   })
   
 };
+
+
+module.exports.getUsers=(req,res)=>{
+  user.find({}).then(result=>{
+    if(!result)return res.json({succes:true,result:"No result found"})
+    return res.json({succes:true,result:result});
+  }).catch(err=>{
+    return res.json({succes:false,result:err});
+  });
+};
+module.exports.getuserByName=(req,res)=>{
+  user.findOne({username:req.body.username}).then(result=>{
+    if(!req.body.username) return res.json({succes:false,message:"Please enter the username"});
+    return res.json({succes:true,result:result});
+  }).catch(err=>{
+    return res.json({succes:false,result:true});
+  });
+};
+
 
 
 

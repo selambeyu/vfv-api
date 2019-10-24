@@ -32,7 +32,7 @@ module.exports={
         })
     },
     getData:(req,res)=>{
-        ProfesionalModel.find()
+        ProfesionalModel.find({})
         .then(result=>{
             if(!result)res.json({success:false,result:"No result found"})
             res.json({success:true,result:result})
@@ -50,6 +50,14 @@ module.exports={
         .catch(err=>{
             res.json({success:false,result:err})
         })
+    },
+    getProfessionalByUsername:(req,res)=>{
+        ProfesionalModel.findOne({username:req.body.username}).then(result=>{
+            if(!username) return res.json({succes:false,result:"Please enter the usename"});
+            return res.json({succes:true,result:result});
+        }).catch(err=>{
+            return res.json({success:true,result:err});
+        });
     }
 
 

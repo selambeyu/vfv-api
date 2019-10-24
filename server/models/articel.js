@@ -19,6 +19,14 @@ const ArticleSchema=mongoose.Schema({
     comment:{
         type:String,
 
+    },
+    createAt:{
+        type:Date,
+        default:Date.now
+    },
+    modified:{
+        type:Date,
+        default:Date.now
     }
 });
 

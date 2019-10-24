@@ -1,9 +1,9 @@
 
-const StudentModel=require('../models/students');
+const TrainingcenterModel=require('../models/trainingcenter');
 
 module.exports={
     create:(req,res)=>{
-        const student=new StudentModel({
+        const trainingcenter=new TrainingcenterModel({
             firstname:req.body.firstname,
             lastname:req.body.lastname,
             professionType:req.body.professionType,
@@ -13,7 +13,7 @@ module.exports={
             highschool:req.body.highschool,
             profilePicture:req.body.profilePicture
         });
-       student.save()
+       trainingcenter.save()
        .then(result=>{
            res.json({success:true,result:result});
        })
@@ -22,17 +22,17 @@ module.exports={
        });
     },
     update:(req,res)=>{
-        StudentModel.update({_id:req.body._id},req.body)
-        .then(student=>{
-            if(!student) res.json({success:false,result:"professional does not exit"});
-            res.json(student)
+        TrainingcenterModel.update({_id:req.body._id},req.body)
+        .then(trainingcenter=>{
+            if(!trainingcenter) res.json({success:false,result:"professional does not exit"});
+            res.json(trainingcenter)
         })
         .catch(err=>{
             res.json({succes:true,result:err})
         })
     },
     getData:(req,res)=>{
-        StudentModel.find({})
+        TrainingcenterModel.find({})
         .then(result=>{
             if(!result)res.json({success:false,result:"No result found"})
             res.json({success:true,result:result})
@@ -42,7 +42,7 @@ module.exports={
         })
     },
     delete:(req,res)=>{
-        StudentModel.remove({_id:req.body._id})
+        TrainingcenterModel.remove({_id:req.body._id})
         .then(result=>{
             if(!result)res.json({succes:false,result:"no user with this id"})
             res.json({success:true,result:result})
@@ -51,8 +51,8 @@ module.exports={
             res.json({success:false,result:err})
         })
     },
-    getStudentByUsername:(req,res)=>{
-        StudentModel.findOne({username:req.body.username}).then(result=>{
+    getProfessionalByUsername:(req,res)=>{
+        TrainingcenterModel.findOne({username:req.body.username}).then(result=>{
             if(!username) return res.json({succes:false,result:"Please enter the usename"});
             return res.json({succes:true,result:result});
         }).catch(err=>{
