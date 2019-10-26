@@ -3,8 +3,6 @@ const bcrypt=require('bcryptjs');
 
 const uniqueValidator=require('mongoose-unique-validator');
 
-// User Schema
-
 const AdminSchema=mongoose.Schema({
     firstname:{
         type:String,

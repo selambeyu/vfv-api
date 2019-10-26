@@ -12,8 +12,17 @@ const admin=require('../models/users');
 const config=require('../config/config');
 const Token=require('../models/token')
 
-/*  */
-//require('../config/passport')(passport);
+/**
+ * @api {get} /user/register Request User information
+ * @apiName registerUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ */
+
 
 module.exports.register=(req,res)=>{
   let newAdmin=new admin({

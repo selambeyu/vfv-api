@@ -1,0 +1,15 @@
+{
+    "name": "vfv-api",
+    "version": "0.1.0",
+    "description": "vfv project",
+    "title": "Custom apiDoc browser title",
+    "url" : "https://api.github.com/v1",
+    "header": {
+        "title": "My own header title"
+        
+      },
+      "footer": {
+        "title": "My own footer title"
+        
+      }
+  }

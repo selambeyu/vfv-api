@@ -25,23 +25,24 @@ module.exports.register=(req,res)=>{
     role:req.body.role
 
   });
-  
-    user.findOne({username:req.body.username},(err,result)=>{
-      if(user) return res.json({succes:false,result:"User alredy exits"}); 
+    
+    user.findOne({username:req.body.username}).then(result=>{
+      if(result) return res.json({success:false,result:"user already exist"});
       bcrypt.genSalt(10,(err,salt)=>{
-        if(err) return res.json({succes:false,result:err})
+        if(err) return res.json({succes:fals,result:err});
         bcrypt.hash(newUser.password,salt,(err,hash)=>{
-            if(err)return res.json({succes:false,message:err});
-            newUser.password=hash;
-            newUser.save((err)=>{
-              if(err) return res.json({succes:false,result:err});
-              return res.json({succes:true,result:result})
-            
-            })
-        });
-    });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-    })                                                                                        
+          if(err) return res.json({succes:false,result:err});
+          newUser.password=hash;
+          newUser.save().then(result=>{
+            return res.json({succes:true,result:result,message:"user successfuly registered"})
+          }).catch(err=>{
+            return res.json({succes:false,result:err});
+          })
+        })
+      })
+    }).catch(err=>{
+      return res.json({succes:false,result:err});
+    })
 
   
 };
@@ -52,8 +53,10 @@ module.exports.register=(req,res)=>{
 
 
 module.exports.login=(req,res)=>{
-  user.findOne({username:req.body.username},(err,user)=>{
-    if(err)throw err;
+  const username=req.body.username;
+  const password=req.body.password;
+  user.findOne({username                                                                                                                                                                                                                                                                                                },(err,user)=>{
+    if(err)throw err;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
     bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
       if(err)throw err;
       if(isMatch){
@@ -87,9 +90,42 @@ module.exports.login=(req,res)=>{
         return res.json({success:false,message:"Wrong password"})
       }
 
-    })
+    });
   })
-}
+};
+
+// module.exports.login=(req,res)=>{
+//   const username = req.body.username;
+//   const password = req.body.password;   
+//   user.findOne({ username })
+//        .then(user => {
+//           if (!user) {
+//             //  errors.user = "No Account Found";
+//              return res.status(404).json({succes:false,message:"not found"});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+//              }
+//          bcrypt.compare(password, user.password)
+//                 .then(isMatch => {
+                  
+//                    if (isMatch) {
+                     
+//                     jwt.sign({user:user}, config.secret, { expiresIn: 36000 },
+//                             (err, token) => {
+//                               if (err) res.status(500)
+//                               .json({ error: "Error signing token",
+//                                      raw: err }); 
+//                                res.json({ 
+//                                success: true,
+//                                token: token });
+//                     });      
+//               } else {
+//                   errors.password = "Password is incorrect";                        
+//                   res.status(400).json(errors);
+//       }
+//     })
+//   }).catch(err=>{
+//     return res.json({succes:true,result:err})
+//   })
+// }
 
 
 // /get authenticated user profile

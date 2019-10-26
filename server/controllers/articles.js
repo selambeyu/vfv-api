@@ -1,20 +1,37 @@
 const ArticleModel=require('../models/articel');
+const jwt=require('jsonwebtoken');
+
+
+
+
 
 module.exports={
     create:(req,res)=>{
-        const articel=new ArticleModel({
-            author:req.body.author,
-            title:req.body.title,
-            content:req.body.content,
-            comment:req.body.comment
-        });
-       articel.save()
-       .then(result=>{
-           res.json({success:true,result:result});
-       })
-       .catch(err=>{
-           res.json({success:false,result:err});
-       });
+jwt.verify(req.token,config.secret,(err,authData)=>{
+    if(err){res.status(403)
+    }else{
+        if(authData.role=="professional"){
+            const articel=new ArticleModel({
+                author:req.body.author,
+                title:req.body.title,
+                content:req.body.content,
+                comment:req.body.comment
+            });
+           articel.save()
+           .then(result=>{
+               res.json({success:true,result:result});
+           })
+           .catch(err=>{
+               res.json({success:false,result:err});
+           });
+
+        }else{
+            return res.json({succes:false,message:"permission denied"})
+        }
+    }
+
+})
+        
     },
     update:(req,res)=>{
         ArticleModel.update({_id:req.body._id},req.body)
