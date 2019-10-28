@@ -10,7 +10,7 @@ var logger = require('morgan');
 
 
 const database=require('./server/config/db_connection')
-// var indexRouter = require('./routes/index');
+var indexRouter = require('./server/routes/index');
 var usersRouter = require('./server/routes/users');
 var adminRouter=require('./server/routes/admin');
 var articleRouter=require('./server/routes/article');
@@ -39,6 +39,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/admin', express.static('./node_modules/admin-lte-express/public'))
+// app.use('/', require('admin-lte-express'));
+
 
 app.use(bodyparser.json());
 app.use(passport.initialize());
@@ -47,6 +50,7 @@ app.use(passport.session());
 
 
 app.use('/api/users', usersRouter);
+app.use('/',indexRouter);
 app.use('/api/admin',adminRouter);
 app.use('/api/article',articleRouter);
 app.use('./api/user/professional',profesionalRouter)

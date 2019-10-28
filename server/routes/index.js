@@ -6,4 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/view',function(req,res,next){
+  res.render('blank-page',{title:'Adminlte'});
+});
 module.exports = router;
