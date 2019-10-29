@@ -7,7 +7,7 @@ const jwt=require('jsonwebtoken');
 const nodemailer=require('nodemailer')
 router.use(passport.initialize());
 router.use(passport.session());
-const admin=require('../models/users');
+const admin=require('../models/admin');
 //const db=require('../config/db_connection');
 const config=require('../config/config');
 const Token=require('../models/token')
@@ -36,7 +36,7 @@ module.exports.register=(req,res)=>{
   });
   
     admin.findOne({username:req.body.username},(err,result)=>{
-      if(admin) return res.json({succes:false,result:"admin alredy exits"}); 
+      // if(admin) return res.json({succes:false,result:"admin alredy exits"}); 
       bcrypt.genSalt(10,(err,salt)=>{
         if(err) return res.json({succes:false,result:err})
         bcrypt.hash(newAdmin.password,salt,(err,hash)=>{
@@ -44,7 +44,7 @@ module.exports.register=(req,res)=>{
             newAdmin.password=hash;
             newAdmin.save((err)=>{
               if(err) return res.json({succes:false,result:err});
-              return res.json({succes:true,result:result})
+              return res.json({succes:true,result:"successfully registered"})
             
             })
         });
@@ -60,24 +60,50 @@ module.exports.register=(req,res)=>{
 
 
 
-module.exports.login=(req,res)=>{
-  admin.findOne({username:req.body.username},(err,user)=>{
-    if(err)throw err;
-    bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
-      if(err)throw err;
-      if(isMatch){
-        const token=jwt.sign({user:user},config.secret,{expiresIn:604880})
+// module.exports.login=(req,res)=>{
+//   admin.findOne({username:req.body.username},(err,admin)=>{
+//     if(err)throw err;
+//     bcrypt.compare(req.body.password,admin.password,(err,isMatch)=>{
+//       if(err)throw err;
+//       if(isMatch){
+//         const token=jwt.sign({admin:admin},config.secret,{expiresIn:604880})
        
-        return res.json({success:true,token:token})
+//         // return res.json({success:true,token:token})
+//         res.render('blank-page',{title:"adminPage"});
+//         console.log(res.json({succes:true,token:token}));
       
 
-      }else{
-        return res.json({success:false,message:"Wrong password"})
-      }
+//       }else{
+//         // return res.json({success:false,message:"Wrong password"})
+//         res.render('login',{title:"login"})
+//       }
 
+//     })
+//   })
+// }
+
+
+module.exports.login=(req,res)=>{
+
+  admin.findOne({username:req.body.username}).then(admin=>{
+    bcrypt.compare(req.body.password,admin.password,(isMatch)=>{
+      
+        const token=jwt.sign({admin:admin},config.secret,{expiresIn:604880})
+       
+                // return res.json({success:true,token:token})
+                res.render('blank-page',{title:"adminPage"});
+                console.log(res.json({succes:true,token:token}));
+     
+    }).catch(err=>{
+      console.log(res.json({succes:false,message:err}));
+      res.render('login',{title:"wrong"});
+      
     })
-  })
-}
+  }).catch(err=>{
+    console.log(res.json({succes:false,message:err}))
+    res.render('error',{title:"error"})
+  });
+};
 
 
 // /get authenticated user profile
@@ -97,7 +123,9 @@ module.exports.profile=(req,res)=>{
 
 
 
-
+module.exports.adminPage=(req,res)=>{
+  res.render('login',{title:"Adminlogin"})
+}
 
 
 

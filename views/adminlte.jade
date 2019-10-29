@@ -1,0 +1,340 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        title AdminLTE 2 | Dashboard
+        meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+        link(rel="stylesheet", href="/bower/admin-lte/bootstrap/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+        link(rel="stylesheet", href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css")
+        link(rel="stylesheet", href="/bower/admin-lte/dist/css/AdminLTE.min.css")
+        link(rel="stylesheet", href="/bower/admin-lte/dist/css/skins/_all-skins.min.css")
+        | <!--[if lt IE 9]>
+        script(src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")
+        script(src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js")
+        | <![endif]-->
+    body.skin-blue
+        div.wrapper
+            header.main-header
+                a.logo(href="index2.html") <b>Admin</b>LTE
+                nav.navbar.navbar-static-top(role="navigation")
+                    a.sidebar-toggle(href="#", data-toggle="offcanvas", role="button")
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    div.navbar-custom-menu
+                        ul.nav.navbar-nav
+                            li.dropdown.messages-menu
+                                a(href="#", class="dropdown-toggle", data-toggle="dropdown")
+                                    i.fa.fa-envelope-o
+                                    span.label.label-success 4
+                                ul.dropdown-menu
+                                    li.header You have 4 messages
+                                    li
+                                        ul.menu
+                                            li
+                                                a(href="#")
+                                                    div.pull-left
+                                                        img.img-circle(src="/bower/admin-lte/dist/img/user2-160x160.jpg", alt="User Image")
+                                                    h4
+                                                        | Support Team
+                                                        small
+                                                            i.fa.fa-clock-o
+                                                            |  5 mins
+                                                    p Why not buy a new awesome theme?
+                                    li.footer
+                                        a(href="#") See All Messages
+                            li.dropdown.notifications-menu
+                                a.dropdown-toggle(href="#", data-toggle="dropdown")
+                                    i.fa.fa-bell-o
+                                    span.label.label-warning
+                                ul.dropdown-menu
+                                    li.header You have 10 notifications
+                                    li
+                                        ul.menu
+                                            li
+                                                a(href="#")
+                                                    i.fa.fa-users.text-aqua
+                                                    |  5 new members joined today
+                                    li.footer
+                                        a(href="#") View all
+                            li.dropdown.tasks-menu
+                                a.dropdown-toggle(href="#", data-toggle="dropdown")
+                                    i.fa.fa-flag-o
+                                    span.label.label-danger 9
+                                ul.dropdown-menu
+                                    li.header You have 9 tasks
+                                    li
+                                        ul.menu
+                                            li
+                                                a(href="#")
+                                                    h3
+                                                        | Design some buttons
+                                                        small.pull-right 20%
+                                                    div.progress.xs
+                                                        div.progress-bar.progress-bar-aqua(style="width: 20%", role="progressbar", aria-valuenow="20", aria-valuemin="0", aria-valuemax="100")
+                                                            span.sr-only 20% Complete
+                                    li.footer
+                                        a(href="#") View all tasks
+                            li.dropdown.user.user-menu
+                                a.dropdown-toggle(href="#", data-toggle="dropdown")
+                                    img.user-image(src="/bower/admin-lte/dist/img/user2-160x160.jpg", alt="User Image")
+                                    span.hidden-xs Alexander Pierce
+                                ul.dropdown-menu
+                                    li.user-header
+                                        img.img-circle(src="/bower/admin-lte/dist/img/user2-160x160.jpg", alt="User Image")
+                                        p
+                                            | Alexander Pierce - Web Developer
+                                            small Member since Nov. 2012
+                                    li.user-body
+                                        div.col-xs-4.text-center
+                                            a(href="#") Followers
+                                        div.col-xs-4.text-center
+                                             a(href="#")  Sales
+                                        div.col-xs-4.text-center
+                                             a(href="#")  Friends
+                                    li.user-footer
+                                        div.pull-left
+                                            a.btn.btn-default.btn-flat(href="#") Profile
+                                        div.pull-right
+                                            a.btn.btn-default.btn-flat(href="#") Sign out
+
+            aside.main-sidebar
+                section.sidebar
+                    div.user-panel
+                        div.pull-left.image
+                            img.img-circle(src="/bower/admin-lte/dist/img/user2-160x160.jpg", alt="User Image")
+                        div.pull-left.info
+                            p Alexander Pierce
+                            a(href="#")
+                                i.fa.fa-circle.text-success
+                                |  Online
+
+                    form.sidebar-form(action="#", method="get")
+                        div.input-group
+                            input(type="text", name="q", class="form-control", placeholder="Search...")
+                            span.input-group-btn
+                                button(type='submit', name='seach', id='search-btn', class="btn btn-flat"): i.fa.fa-search
+                    ul.sidebar-menu
+                        li.header MAIN NAVIGATION
+                        li.treeview
+                            a(href="#")
+                                i.fa.fa-dashboard
+                                span Dashboard
+                                i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li: a(href="index.html")
+                                    i.fa.fa-circle-o
+                                    |  Dashboard v1
+                                li: a(href="index2.html")
+                                    i.fa.fa-circle-o
+                                    |  Dashboard v2
+                        li.treeview
+                            a(href="#")
+                                i.fa.fa-files-o
+                                span Layout Options
+                                span.label.label-primary.pull-right 4
+                            ul.treeview-menu
+                                li: a(href="../layout/top-nav.html")
+                                    i.fa.fa-circle-o
+                                    |  Top Navigation
+                                li: a(href="../layout/boxed.html")
+                                    i.fa.fa-circle-o
+                                    |  Boxed
+                                li: a(href="../layout/fixed.html")
+                                    i.fa.fa-circle-o
+                                    |  Fixed
+                                li: a(href="../layout/collapsed-sidebar.html")
+                                    i.fa.fa-circle-o
+                                    |  Collapsed Sidebar
+                        li
+                            a(href="../widgets.html")
+                                i.fa.fa-th
+                                span Widgets
+                                small.label.pull-right.bg-green Hot
+                        li.treeview
+                            a(href="#")
+                                i.fa.fa-pie-chart
+                                span Charts
+                                i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li: a(href="../charts/morris.html")
+                                    i.fa.fa-circle-o
+                                    |  Morris
+                                li: a(href="../charts/flot.html")
+                                    i.fa.fa-circle-o
+                                    |  Flot
+                                li: a(href="../charts/inline.html")
+                                    i.fa.fa-circle-o
+                                    |  Inline charts
+                        li.treeview
+                            a(href="#")
+                                i.fa.fa-laptop
+                                span UI Elements
+                                i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li: a(href="../UI/general.html")
+                                    i.fa.fa-circle-o
+                                    |  General
+                                li: a(href="../UI/icons.html")
+                                    i.fa.fa-circle-o
+                                    |  Icons
+                                li: a(href="../UI/buttons.html")
+                                    i.fa.fa-circle-o
+                                    |  Buttons
+                                li: a(href="../UI/sliders.html")
+                                    i.fa.fa-circle-o
+                                    |  Sliders
+                                li: a(href="../UI/timeline.html")
+                                    i.fa.fa-circle-o
+                                    |  Timeline
+                                li: a(href="../UI/modals.html")
+                                    i.fa.fa-circle-o
+                                    |  Modals
+                        li.treeview
+                            a(href="#")
+                                i.fa.fa-edit
+                                span Forms
+                                i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li: a(href="../forms/general.html")
+                                    i.fa.fa-circle-o
+                                    |  General Elements
+                                li: a(href="../forms/advanced.html")
+                                    i.fa.fa-circle-o
+                                    |  Advanced Elements
+                                li: a(href="../forms/editors.html")
+                                    i.fa.fa-circle-o
+                                    |  Editors
+                        li.treeview
+                            a(href="#")
+                                i.fa.fa-table
+                                span Tables
+                                i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li: a(href="../tables/simple.html")
+                                    i.fa.fa-circle-o
+                                    |  Simple Tables
+                                li: a(href="../tables/data.html")
+                                    i.fa.fa-circle-o
+                                    |  Data Tables
+                        li
+                            a(href="../calendar.html")
+                                i.fa.fa-calendar
+                                span Calendar
+                                small.label.pull-right.bg-red 3
+                        li
+                            a(href="../mailbox/mailbox.html")
+                                i.fa.fa-envelope
+                                span Mailbox
+                                small.label.pull-right.bg-yellow 12
+                        li.treeview.active
+                            a(href="#")
+                                i.fa.fa-folder
+                                span Examples
+                                i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li: a(href="invoice.html")
+                                    i.fa.fa-circle-o
+                                    |  Invoice
+                                li: a(href="login.html")
+                                    i.fa.fa-circle-o
+                                    |  Login
+                                li: a(href="register.html")
+                                    i.fa.fa-circle-o
+                                    |  Register
+                                li: a(href="lockscreen.html")
+                                    i.fa.fa-circle-o
+                                    |  Lockscreen
+                                li: a(href="404.html")
+                                    i.fa.fa-circle-o
+                                    |  404 Error
+                                li: a(href="500.html")
+                                    i.fa.fa-circle-o
+                                    |  500 Error
+                                li.active: a(href="blank.html")
+                                    i.fa.fa-circle-o
+                                    |  Blank Page
+                        li.treeview
+                            a(href="#")
+                                i.fa.fa-share
+                                span Multilevel
+                                i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li: a(href="#")
+                                    i.fa.fa-circle-o
+                                    | Level One
+                                li
+                                    a(href="#")
+                                        i.fa.fa-circle-o
+                                        | Level One
+                                        i.fa.fa-angle-left.pull-right
+                                    ul.treeview-menu
+                                        li: a(href="#")
+                                            i.fa.fa-circle-o
+                                            | Level Two
+                                        li
+                                            a(href="#")
+                                                i.fa.fa-circle-o
+                                                | Level Two
+                                                i.fa.fa-angle-left.pull-right
+                                            ul.treeview-menu
+                                                li: a(href="#")
+                                                    i.fa.fa-circle-o
+                                                    | Level Three
+                                                li: a(href="#")
+                                                    i.fa.fa-circle-o
+                                                    | Level Three
+                                li: a(href="#")
+                                    i.fa.fa-circle-o
+                                    |  Level One
+                        li: a(href="documentation/index.html")
+                            i.fa.fa-book
+                            |  Documentation
+                        li.header LABELS
+                        li: a(href="#")
+                            i.fa.fa-circle-o.text-danger
+                            |  Important
+                        li: a(href="#")
+                            i.fa.fa-circle-o.text-warning
+                            |  Warning
+                        li: a(href="#")
+                            i.fa.fa-circle-o.text-info
+                            |  Information
+
+            div.content-wrapper
+                section.content-header
+                    h1
+                        | Blank page
+                        small it all starts here
+                    ol.breadcrumb
+                        li: a(href="#")
+                            i.fa.fa-dashboard
+                            |  Home
+                        li: a(href="#") Examples
+                        li.active Blank page
+
+                section.content
+                    div.box
+                        div.box-header.with-border
+                            h3.box-title Title
+                            div.box-tools.pull-right
+                                button.btn.btn-box-tool(data-widget="collapse", data-toggle="tooltip", title="Collapse"): i.fa.fa-minus
+                                button.btn.btn-box-tool(data-widget="remove", data-toggle="tooltip", title="Remove"): i.fa.fa-times
+                        div.box-body Start creating your amazing application!
+                        div.box-footer Footer
+
+            footer.main-footer
+                div.pull-right.hidden-xs
+                    b Version
+                    |  2.0
+                strong Copyright © 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.
+                |  All rights reserved.
+
+        script(src="/adminlte/plugins/jQuery/jQuery-2.1.3.min.js")
+        script(src="/adminlte/bootstrap/js/bootstrap.min.js")
+        script(src="/adminlte/plugins/slimScroll/jquery.slimScroll.min.js")
+        script(src="/adminlter/plugins/fastclick/fastclick.min.js")
+        script(src="/adminlte/dist/js/app.min.js")
+        script(src="/adminlte/dist/js/demo.js")

@@ -50,10 +50,10 @@ app.use(passport.session());
 
 
 app.use('/api/users', usersRouter);
-app.use('/',indexRouter);
+// app.use('/api/admin',indexRouter);
 app.use('/api/admin',adminRouter);
 app.use('/api/article',articleRouter);
-app.use('./api/user/professional',profesionalRouter)
+app.use('/api/user/professional',profesionalRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
