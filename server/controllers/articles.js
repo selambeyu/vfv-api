@@ -7,10 +7,7 @@ const jwt=require('jsonwebtoken');
 
 module.exports={
     create:(req,res)=>{
-jwt.verify(req.token,config.secret,(err,authData)=>{
-    if(err){res.status(403)
-    }else{
-        if(authData.role=="professional"){
+
             const articel=new ArticleModel({
                 author:req.body.author,
                 title:req.body.title,
@@ -25,14 +22,9 @@ jwt.verify(req.token,config.secret,(err,authData)=>{
                res.json({success:false,result:err});
            });
 
-        }else{
-            return res.json({succes:false,message:"permission denied"})
-        }
-    }
-
-})
         
-    },
+    }
+,
     update:(req,res)=>{
         ArticleModel.update({_id:req.body._id},req.body)
         .then(articel=>{

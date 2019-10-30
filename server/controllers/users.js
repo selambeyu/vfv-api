@@ -1,16 +1,19 @@
-// const User =require('../services/users');
+
 const bcrypt=require('bcryptjs')
 const express = require('express');
 const router = express.Router();
 const passport =require('passport');
 const jwt=require('jsonwebtoken');
-// const nodemailer=require('nodemailer')
-router.use(passport.initialize());
-router.use(passport.session());
 const user=require('../models/users');
 //const db=require('../config/db_connection');
 const config=require('../config/config');
 // const Token=require('../models/token')
+
+
+
+router.use(passport.initialize());
+router.use(passport.session());
+
 
 /*  */
 //require('../config/passport')(passport);
@@ -56,9 +59,9 @@ module.exports.login=(req,res)=>{
   const username=req.body.username;
   const password=req.body.password;
   user.findOne({username                                                                                                                                                                                                                                                                                                },(err,user)=>{
-    if(err)throw err;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+    if(username!=user.username) return res.json({success:false,message:"wrong username"});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
     bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
-      if(err)throw err;
+      if(err)res.json({success:false,message:"no user found"});
       if(isMatch){
         
         const token=jwt.sign({user:user},config.secret,{expiresIn:604880})
@@ -94,38 +97,6 @@ module.exports.login=(req,res)=>{
   })
 };
 
-// module.exports.login=(req,res)=>{
-//   const username = req.body.username;
-//   const password = req.body.password;   
-//   user.findOne({ username })
-//        .then(user => {
-//           if (!user) {
-//             //  errors.user = "No Account Found";
-//              return res.status(404).json({succes:false,message:"not found"});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-//              }
-//          bcrypt.compare(password, user.password)
-//                 .then(isMatch => {
-                  
-//                    if (isMatch) {
-                     
-//                     jwt.sign({user:user}, config.secret, { expiresIn: 36000 },
-//                             (err, token) => {
-//                               if (err) res.status(500)
-//                               .json({ error: "Error signing token",
-//                                      raw: err }); 
-//                                res.json({ 
-//                                success: true,
-//                                token: token });
-//                     });      
-//               } else {
-//                   errors.password = "Password is incorrect";                        
-//                   res.status(400).json(errors);
-//       }
-//     })
-//   }).catch(err=>{
-//     return res.json({succes:true,result:err})
-//   })
-// }
 
 
 // /get authenticated user profile
@@ -136,15 +107,15 @@ module.exports.profile=(req,res)=>{
     if(err){
       res.sendStatus(403);
     }else{
-      if(authData.role!="professional"){
+      if(authData.user.role==="professional"){
         res.json({
-          message:"user profile",
+          message:"professional profile",
           authData
         });
       }
       else{
         res.json({
-          message:"Professional profile",
+          message:"user profile",
           authData
         });
       }
