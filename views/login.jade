@@ -32,7 +32,7 @@ html
       // /.login-logo
       .login-box-body
         p.login-box-msg Sign in to start your session
-        form(action='login', method='POST')
+        form(action='/api/admin/login', method='POST')
           .form-group.has-feedback
             input.form-control(type='text',name="username", placeholder='Username')
             span.glyphicon.glyphicon-envelope.form-control-feedback
