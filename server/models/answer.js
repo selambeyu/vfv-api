@@ -1,16 +1,17 @@
 const mongoose=require('mongoose');
 
-const QuestionSchema=mongoose.Schema({
-    question:{
-        type:String,
-        required:true
-    },
+const AnswerSchema=mongoose.Schema({
+    
     answer:{
         type:String
     },
-    askedBy:{
+    answeredBy:{
         type:String,
         unique:true
+    },
+    question_Id:{
+        type:String
+
     },
     createAt:{
         type:Date,
@@ -24,4 +25,4 @@ const QuestionSchema=mongoose.Schema({
   
 });
 
-module.exports=mongoose.model('Question',QuestionSchema);
+module.exports=mongoose.model('Answer',AnswerSchema);

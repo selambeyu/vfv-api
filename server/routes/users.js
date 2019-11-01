@@ -1,7 +1,13 @@
 const  express=require('express');
 const router=express.Router();
 const UserController=require('../controllers/users');
-const StudentController=require('../controllers/students')
+const StudentController=require('../controllers/students');
+const ProfessionalController=require('../controllers/professionals');
+const ArticelController=require('../controllers/articles');
+const QuestionController=require('../controllers/question');
+const AnswerController=require('../controllers/answer');
+const checkrole=require('../config/checkRole');
+
 const verifyToken=require('../config/auth');
 
 
@@ -13,6 +19,19 @@ router.get('/profile',verifyToken,UserController.profile);
 router.get('/student/profile',);
 router.get('/student/addInfo',verifyToken);
 router.get('/student/viewArticle',verifyToken,StudentController.getData);
+router.get('/student/viewQuestion',verifyToken,QuestionController.getQuestion);
+router.post('/student/createQuestion',verifyToken,QuestionController.createQuestion);
+router.put('/student/updateQuestion/:id',verifyToken,QuestionController.updateQuestion);
+router.delete('/student/deleteQuestion/:id',verifyToken,QuestionController.deleteQuestion);
+router.get('/professional/viewQuestion');
+router.post('/professional/answerQuestion/:id',AnswerController.answerQuestion);
+router.put('/professional/updateAnswer/:id',AnswerController.updateAnswer);
+
+router.get('/professional/viewArticel/:id',verifyToken,ProfessionalController.getData);
+// router.get('/professional/profile',verifyToken,ProfessionalController.profile);
+
+
+
 
 
 // router.delete();
