@@ -6,14 +6,6 @@ const uniqueValidator=require('mongoose-unique-validator');
 // User Schema
 
 const UserSchema=mongoose.Schema({
-    firstname:{
-        type:String,
-        required:true
-    },
-    lastname:{
-        type:String,
-        required:true
-    },
     username:{
         type:String,
         // unique:true,

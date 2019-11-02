@@ -2,7 +2,7 @@ const mongoose=require('mongoose');
 
 const AnswerSchema=mongoose.Schema({
     
-    answer:{
+    questionAnswer:{
         type:String
     },
     answeredBy:{

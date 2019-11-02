@@ -20,8 +20,6 @@ router.use(passport.session());
 
 module.exports.register=(req,res)=>{
   let newUser=new user({
-    firstname:req.body.firstname,
-    lastname:req.body.lastname,
     username:req.body.username,
     email:req.body.email,
     password:req.body.password,
@@ -81,13 +79,7 @@ module.exports.login=(req,res)=>{
             message:"Stuent log"
           })
         }
-        // else{
-        //   return res.json({
-        //     succes:true,
-        //     token:token,
-        //     message:"Student log in"
-        //   })
-        // }
+        
 
       }else{
         return res.json({success:false,message:"Wrong password"})

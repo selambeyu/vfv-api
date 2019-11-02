@@ -1,6 +1,10 @@
 const mongoose=require('mongoose');
 
 const TrainingCenterSchema=mongoose.Schema({
+    useId:{
+        type:String,
+        unique:true
+    },
     companyName:{
         type:String,
         required:true
@@ -22,4 +26,4 @@ const TrainingCenterSchema=mongoose.Schema({
     }
 })
 
-module.exports=mongoose.model('TrainingCenterSchema',TrainingCenterSchema)
+module.exports=mongoose.model('TrainingCenter',TrainingCenterSchema)

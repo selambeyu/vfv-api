@@ -23,12 +23,17 @@ router.get('/student/viewQuestion',verifyToken,QuestionController.getQuestion);
 router.post('/student/createQuestion',verifyToken,QuestionController.createQuestion);
 router.put('/student/updateQuestion/:id',verifyToken,QuestionController.updateQuestion);
 router.delete('/student/deleteQuestion/:id',verifyToken,QuestionController.deleteQuestion);
-router.get('/professional/viewQuestion');
-router.post('/professional/answerQuestion/:id',AnswerController.answerQuestion);
-router.put('/professional/updateAnswer/:id',AnswerController.updateAnswer);
 
+router.get('/professional/viewArticle',verifyToken,ArticelController.getData);
+router.get('/professional/viewQuestion',verifyToken,QuestionController.getQuestion);
 router.get('/professional/viewArticel/:id',verifyToken,ProfessionalController.getData);
 // router.get('/professional/profile',verifyToken,ProfessionalController.profile);
+router.get('/professional/viewAnswer',verifyToken,AnswerController.viewAnswer);
+router.post('/professional/answerQuestion/:id',verifyToken,AnswerController.answerQuestion);
+router.put('/professional/updateAnswer/:id',verifyToken,AnswerController.updateAnswer);
+// router.delete('/professional/deleteAnswer/:id',verifyToken,AnswerController)
+
+
 
 
 

@@ -1,6 +1,10 @@
 const mongoose=require('mongoose');
 
 const ProfessionalSchema=mongoose.Schema({
+    userId:{
+        type:String,
+        unique:true
+    },
     firstname:{
         type:String,
         required:true
@@ -39,4 +43,4 @@ const ProfessionalSchema=mongoose.Schema({
     }
 });
 
-module.exports=mongoose.model('ProfessionalSchema',ProfessionalSchema);
+module.exports=mongoose.model('Professional',ProfessionalSchema);
