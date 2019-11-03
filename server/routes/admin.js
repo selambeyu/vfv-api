@@ -14,7 +14,7 @@ const AdminController=require('../controllers/admin')
 
 router.get('/',AdminController.adminPage);
 router.post('/register',AdminController.register);
-router.post('/login',AdminController.login);
+router.post('/login',verifyToken,AdminController.login);
 router.get('/profile',verifyToken,AdminController.profile);
 
 

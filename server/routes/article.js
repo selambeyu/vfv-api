@@ -6,7 +6,7 @@ const checkrole=require('../config/checkRole')
 const verifyToken=require('../config/auth');
 
 
-router.post('/newArticle',checkrole(["professional"]),ArticleController.create);
+router.post('/newArticle',verifyToken,ArticleController.create);
 router.put('/updateArticle',ArticleController.update);
 router.get('/getArticle',verifyToken,ArticleController.getData)
 router.get('/getauthor',ArticleController.getByauthor);

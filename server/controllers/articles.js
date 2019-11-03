@@ -1,6 +1,30 @@
 const ArticleModel=require('../models/articel');
 const jwt=require('jsonwebtoken');
 
+module.exports.addArticle=(req,res)=>{
+
+}
+
+module.exports.editArticle=(req,res)=>{
+
+}
+
+module.exports.deleteArticle=(req,res)=>{
+
+}
+
+
+module.exports.getByTitle=(req,res)=>{
+
+}
+
+module.exports.getByauthor=(req,res)=>{
+
+}
+
+module.exports.getArticle=(req,res)=>{
+    
+}
 
 
 
@@ -46,6 +70,7 @@ module.exports={
         })
     },
     getById:(req,res)=>{
+        
         ArticleModel.findById({_id:req.body._id}).then(result=>{
             if(!result)res.json({success:false,result:"No result fount"})
             res.json({succes:true,result:result});
