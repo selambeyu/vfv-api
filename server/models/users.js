@@ -8,21 +8,19 @@ const uniqueValidator=require('mongoose-unique-validator');
 const UserSchema=mongoose.Schema({
     username:{
         type:String,
-        // unique:true,
-        required:true
-    },
+        unique:true,
+        required:true                                                                                    }                                                                                                ,
     email:{
         type:String,
-        // unique:true,
-        index:true,
-        required:true
-    },
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],                                        index:true,                                                                                      required:true
+    }, 
     password:{
         type:String,
         required:true
     },
     role:{
         type:String,
+        enum:["admin","professional","student","trainingcenter"],
         required:true
     }
 });

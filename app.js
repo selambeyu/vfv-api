@@ -38,6 +38,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(__dirname+'./server/publics/'))
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/admin', express.static('./node_modules/admin-lte-express/public'))
 // app.use('/', require('admin-lte-express'));

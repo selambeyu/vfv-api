@@ -1,5 +1,59 @@
 
-const StudentModel=require('../models/students');
+const Student=require('../models/students');
+const config =require('../config/config');
+const jwt=require('jsonwebtoken');
+
+module.exports.addInfo=(req,res)=>{
+    jwt.verfy(req.token,config.secret,(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            if(authData.user.role==="student"){
+                const student=new Student({
+                    userId:authData.user.userId,
+                    firstname:req.body.firstname,
+                    lastname:req.body.lastname,
+                    professionType:req.body.professionType,
+                    address:req.body.address,
+                    workPlace:req.body.workPlace,
+                    college:req.body.college,
+                    highschool:req.body.highschool,
+                    profilePicture:req.body.file
+                });
+                student.save()
+                .then(student=>{
+                    res.json({student:student})
+                }).catch(err=>{
+                    res.json({
+                        student:err
+                    })
+                })
+            }
+        }
+    })
+
+}
+
+module.exports.editProfile=(req,res)=>{
+    jwt.verify(req.token,config.secret,(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            if(authData.user.role==="student"){
+                Student.findById({_id:req.params.id}).then(result=>{
+                    if(authData.user._id===result.userId){
+                        Student.findByIdAndUpdate({_id:req.params.id},res.body).then(result=>{
+                            res.json({result:result})
+                        })
+                    }
+                }).catch(err=>{
+                    res.json({result:err})
+                })
+            }
+        }
+    })
+}
+
 
 module.exports={
     create:(req,res)=>{
