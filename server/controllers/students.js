@@ -18,7 +18,7 @@ module.exports.addInfo=(req,res)=>{
                     workPlace:req.body.workPlace,
                     college:req.body.college,
                     highschool:req.body.highschool,
-                    profilePicture:req.body.file
+                    profilePicture:req.body.file    
                 });
                 student.save()
                 .then(student=>{
@@ -54,6 +54,26 @@ module.exports.editProfile=(req,res)=>{
     })
 }
 
+
+module.exports.profile=(req,res)=>{
+    jwt.verify(req.token,config.secret,(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            Student.findById({_id:req.params}).then(result=>{
+                if(authData.user._id===result.userId){
+                    res.json({
+                        result:result
+                    })
+                }else{
+                    res.json({
+                        result:"Unaurthorized"
+                    })
+                }
+            })
+        }
+    })
+}
 
 module.exports={
     create:(req,res)=>{

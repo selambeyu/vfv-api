@@ -13,7 +13,7 @@ module.exports.addInfo=(req,res)=>{
                 trainingcenteinfo=new Trainingcenter({
                     userId:authData.user._id,
                     companyName:req.body.companyName,
-                    logo:res.body.logo,
+                    logo:res.body.file,
                     city:req.body.city,
                     compayDescription:req.body.compayDescription,
                     trainingType:req.body.trainingType
@@ -75,6 +75,26 @@ module.exports.getTrainingcenter=(req,res)=>{
     })
 }
 
+module.exports.getTrainingcenterByName=(req,res)=>{
+    jwt.verify(req.token,confg.secret,(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            if(authData.user.role==="trainingcenter"){
+                Trainingcenter.findOne({companyName:req.params.companyName}).then(result=>{
+                        res.json({
+                            result:result
+                        })
+                    }).catch(err=>{
+                        res.json({result:err})
+                    })
+
+            }
+        }
+      
+    })
+}
+
 
 module.exports.getCenterByName=(req,res)=>{
     jwt.verify(req.token,confg.secret,(err,authData)=>{
@@ -95,6 +115,27 @@ module.exports.getCenterByName=(req,res)=>{
         
     })
 }
+
+module.exports.profile=(req,res)=>{
+    jwt.verify(req.token,config.secret,(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            Trainingcenter.find({_id:req.params.id}).then(result=>{
+                if(authData.user._id===result.userId){
+                    res.json({
+                        result:result
+                    })
+                }
+            }).catch(err=>{
+                res.json({
+                    result:err
+                })
+            })
+        }
+    })
+}
+
 
 // module.exports={
 //     create:(req,res)=>{
