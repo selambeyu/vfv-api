@@ -36,10 +36,12 @@ router.post('/register',UserController.register);
  */
 router.post('/login',UserController.login);
 /**
- * @api {get} /profile Request User information
+ * @api {get} /profile Request Student information
  * @apiName loginUser
  * @apiGroup User
  *
+ * 
+ * 
 
  *
  * @apiSuccess {String} username Firstname of the User.
@@ -49,40 +51,419 @@ router.post('/login',UserController.login);
  */
 router.get('/profile',verifyToken,UserController.profile);
 
+/**
+ * @api {get} /student/profile Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+*  @apiParam {String} firsname Students .
+ *@apiParam {String} firsname Students .
+ * @apiParam {String} city of Students .
+ * @apiParam {String} bio Students .
+ * 
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} role  Lastname of the User.
+ *@apiSuccess {String} password  Lastname of the User.
+ */
+
 router.get('/student/profile',verifyToken,StudentController.profile);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.post('/student/addInfo',verifyToken,StudentController.addInfo);
-router.put('/student/editprofile:id',verifyToken,StudentController.editProfile);
+/**
+ * @api {put} /student/editprofile/:id Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ * 
+ *@apiParam {String} firsname Students .
+ *@apiParam {String} firsname Students .
+ * @apiParam {String} city of Students .
+ * @apiParam {String} bio Students .
+
+ *
+ * @apiSuccess {String} firstname Firstname of the Student.
+ * @apiSuccess {String} lastname  Lastname of the Student.
+ * @apiSuccess {String} bio   of the Student.
+ *@apiSuccess {String} city   the Student.
+ */
+router.put('/student/editprofile/:id',verifyToken,StudentController.editProfile);
+/**
+ * @api {get} /student/viewArticle Request User information
+ * @apiName ViewArticle
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} author  of the Article.
+ * @apiSuccess {String} title  of the Article.
+ * @apiSuccess {String} content  of the Article.
+ *
+ */
+
 router.get('/student/viewArticle',verifyToken,ArticelController.getArticle);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/student/viewQuestion',verifyToken,QuestionController.getQuestion);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.post('/student/createQuestion',verifyToken,QuestionController.createQuestion);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.put('/student/updateQuestion/:id',verifyToken,QuestionController.updateQuestion);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.delete('/student/deleteQuestion/:id',verifyToken,QuestionController.deleteQuestion);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/student/ArticleByAuthor/:author',verifyToken,ArticelController.getByauthor);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/student/ArticleByTitle/:title',verifyToken,ArticelController.getByTitle);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/student/gettrainingcenter/:companyName',verifyToken,TrainingCenterController.getTrainingcenterByName);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Student
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/student/gettrainingceneter',verifyToken,TrainingCenterController.getTrainingcenter);
 
 
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
 
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 
-router.get('/professional/profile',verifyToken,ProfessionalController.profile)
+router.get('/professional/profile',verifyToken,ProfessionalController.profile);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.post('/professional/addInfo',verifyToken,ProfessionalController.addInfo);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.put('/professional/editProfile',verifyToken,ProfessionalController.editProfile);
-router.post('/professional/addArticle',verifyToken,ArticelController.addArticle)
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
+router.post('/professional/addArticle',verifyToken,ArticelController.addArticle);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/professional/viewArticle',verifyToken,ArticelController.getArticle);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.put('/professional/editArticle',verifyToken,ArticelController.editArticle);
-router.delete('/professional/deleteArticle',verifyToken,ArticelController.deleteArticle)
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
+router.delete('/professional/deleteArticle',verifyToken,ArticelController.deleteArticle);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/professional/viewQuestion',verifyToken,QuestionController.getQuestion);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/professional/viewArticel',verifyToken,ArticelController.getArticle);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/professional/articleByAuthor/:author',verifyToken,ArticelController.getByauthor);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/professional/articleByTitle/:title',verifyToken,ArticelController.getByTitle);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 // router.get('/professional/profile',verifyToken,ProfessionalController.profile);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/professional/viewAnswer',verifyToken,AnswerController.viewAnswer);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.post('/professional/answerQuestion/:id',verifyToken,AnswerController.answerQuestion);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.put('/professional/updateAnswer/:id',verifyToken,AnswerController.updateAnswer);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
+
+ /**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 // router.delete('/professional/deleteAnswer/:id',verifyToken,AnswerController);
 
 router.get('/professional/getTrainingcenter/:companyName',verifyToken,TrainingCenterController.getTrainingcenterByName);
+
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup Professional
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/professional/getTrainingcenter',verifyToken,TrainingCenterController.getTrainingcenter);
 
 
@@ -90,10 +471,71 @@ router.get('/professional/getTrainingcenter',verifyToken,TrainingCenterControlle
 
 
 
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup TrainingCenter
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
+
 router.get('/trainingcenter/profile',verifyToken,TrainingCenterController.profile);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup TrainingCenter
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.get('/trainingcenter/:companyName',verifyToken,TrainingCenterController.getTrainingcenterByName);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup TrainingCenter
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.post('/trainingcenter/addInfo',verifyToken,TrainingCenterController.addInfo);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup TrainingCenter
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 router.put('/trainigcenter/editProfile',verifyToken,TrainingCenterController.editProfile);
+/**
+ * @api {post} /student/addinfo Request User information
+ * @apiName ProfileStudent
+ * @apiGroup TrainingCenter
+ *
+
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} bio  Lastname of the User.
+ *@apiSuccess {String} city  Lastname of the User.
+ */
 
 // router.delete('/trainingcenter/deleteprofile',verifyToken,TrainingCenterController)
 
@@ -103,38 +545,5 @@ router.put('/trainigcenter/editProfile',verifyToken,TrainingCenterController.edi
 
 
 
-// router.delete();
-
-// function verifyToken(req,res,next){
-//   const bearerHeader=req.headers['authorization'];
-//   if(typeof bearerHeader!=='undefined'){
-// // sprlit at thes space
-// const bearer=bearerHeader.split(' ');
-// //get tokent from array 
-// const bearerToken=bearer[1];
-// req.token=bearerToken;
-
-// next();
-//   }else{
-//     res.sendStatus(403);
-//   }
-// }
-
-
-// function isProfessional(req,res,next){
-//     jwt.verify(req.token,config.secret,(err,authData)=>{
-//       if(authData.user.role==='professional'){
-//           res.json({
-//               message:"profesional",
-//               authData
-//           });
-// next();
-
-//       }else{
-//           res.sendStatus(403);
-//       }
-//       })
-
-// }
 
 module.exports=router

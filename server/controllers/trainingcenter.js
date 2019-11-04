@@ -137,6 +137,36 @@ module.exports.profile=(req,res)=>{
 }
 
 
+
+
+module.exports.searchTrainingcenter=(req,res)=>{
+jwt.verify(req.token,confg.secret,(err,authData)=>{
+    if(err){
+        res.sendStatus(403);
+    }else{
+        var obj={};
+        if(req.body.companyName){
+            obj['companyName']=req.body.companyName;
+        }
+        if(req.body.trainingType){
+            obj['trainingType']=trainingType;
+        }
+        Trainingcenter.find(obj,(err,result)=>{
+            if (err) throw err;
+            res.json({
+                result:result
+            })
+
+        })
+
+    }
+})
+
+
+}
+
+
+
 // module.exports={
 //     create:(req,res)=>{
 //         const trainingcenter=new TrainingcenterModel({
