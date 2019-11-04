@@ -18,9 +18,9 @@ router.post('/login',UserController.login);
 router.get('/profile',verifyToken,UserController.profile);
 
 router.get('/student/profile',verifyToken,StudentController.profile);
-router.get('/student/addInfo',verifyToken,StudentController.addInfo);
-router.put('/student/editprofile',verifyToken,StudentController.editProfile);
-router.get('/student/viewArticle',verifyToken,StudentController.getData);
+router.post('/student/addInfo',verifyToken,StudentController.addInfo);
+router.put('/student/editprofile:id',verifyToken,StudentController.editProfile);
+router.get('/student/viewArticle',verifyToken,ArticelController.getArticle);
 router.get('/student/viewQuestion',verifyToken,QuestionController.getQuestion);
 router.post('/student/createQuestion',verifyToken,QuestionController.createQuestion);
 router.put('/student/updateQuestion/:id',verifyToken,QuestionController.updateQuestion);
@@ -41,7 +41,7 @@ router.get('/professional/viewArticle',verifyToken,ArticelController.getArticle)
 router.put('/professional/editArticle',verifyToken,ArticelController.editArticle);
 router.delete('/professional/deleteArticle',verifyToken,ArticelController.deleteArticle)
 router.get('/professional/viewQuestion',verifyToken,QuestionController.getQuestion);
-router.get('/professional/viewArticel/:id',verifyToken,ProfessionalController.getData);
+router.get('/professional/viewArticel',verifyToken,ArticelController.getArticle);
 router.get('/professional/articleByAuthor/:author',verifyToken,ArticelController.getByauthor);
 router.get('/professional/articleByTitle/:title',verifyToken,ArticelController.getByTitle);
 // router.get('/professional/profile',verifyToken,ProfessionalController.profile);

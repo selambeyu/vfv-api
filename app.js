@@ -10,11 +10,11 @@ var logger = require('morgan');
 
 
 const database=require('./server/config/db_connection')
-var indexRouter = require('./server/routes/index');
+// var indexRouter = require('./server/routes/index');
 var usersRouter = require('./server/routes/users');
 var adminRouter=require('./server/routes/admin');
-var articleRouter=require('./server/routes/article');
-var profesionalRouter=require('./server/routes/professional')
+// var articleRouter=require('./server/routes/article');
+// var profesionalRouter=require('./server/routes/professional')
 
 // create a custom middleware
 const checkuserType=function(req,res,next){
@@ -53,8 +53,8 @@ app.use(passport.session());
 app.use('/api/users', usersRouter);
 // app.use('/api/admin',indexRouter);
 app.use('/api/admin',adminRouter);
-app.use('/api/article',articleRouter);
-app.use('/api/user/professional',profesionalRouter)
+// app.use('/api/article',articleRouter);
+// app.use('/api/user/professional',profesionalRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
