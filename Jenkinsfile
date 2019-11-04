@@ -1,6 +1,6 @@
 node {
   def project = 'th-fnote'
-  def appName = 'VFV'
+  def appName = 'vfv'
   def nameSpace='staging'
   def cluster='standard-cluster-1'
   def region='us-central1-a'
