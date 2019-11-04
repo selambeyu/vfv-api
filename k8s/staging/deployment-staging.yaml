@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: DEPLOYEMENT-NAME-staging
+  name: sample-staging
 spec:
   selector:
     matchLabels:
