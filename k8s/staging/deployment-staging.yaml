@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: sample-service
+      app: deployment-name-service
       role: sample
   replicas: 1
   template:
