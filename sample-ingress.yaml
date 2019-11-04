@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sample-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: sample-name
+    ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+  - host: "lb1.sample.project.dns.com"
+    http:
+      paths:
+      - path: /users/*
+        backend:
+          serviceName: sample-backend-servicenmae
+          servicePort: 2002
+      - path: /users
+        backend:
+          serviceName: sample-backend-servicenmae
+          servicePort: 2002
