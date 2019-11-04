@@ -1,11 +1,11 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: sample-staging
+  name: deployment-name-staging
 spec:
   selector:
     matchLabels:
-      app: deployment-name-service
+      app: sample-service
       role: sample
   replicas: 1
   template:
