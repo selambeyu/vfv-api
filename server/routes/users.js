@@ -12,9 +12,41 @@ const checkrole=require('../config/checkRole');
 const verifyToken=require('../config/auth');
 
 
-
+/**
+ * @api {post} /register Request User information
+ * @apiName PostUser
+ * @apiGroup User
+ *
+ * @apiSuccess {String} username Firstname of the User.
+ * @apiSuccess {String} email  Lastname of the User.
+ * @apiSuccess {String} role  Lastname of the User.
+ *@apiSuccess {String} password  Lastname of the User.
+ */
 router.post('/register',UserController.register);
+
+/**
+ * @api {post} /login Request User information
+ * @apiName loginUser
+ * @apiGroup User
+ *
+
+ *
+ * @apiSuccess {String} token Firstname of the User.
+
+ */
 router.post('/login',UserController.login);
+/**
+ * @api {get} /profile Request User information
+ * @apiName loginUser
+ * @apiGroup User
+ *
+
+ *
+ * @apiSuccess {String} username Firstname of the User.
+ * @apiSuccess {String} email  Lastname of the User.
+ * @apiSuccess {String} role  Lastname of the User.
+ *@apiSuccess {String} password  Lastname of the User.
+ */
 router.get('/profile',verifyToken,UserController.profile);
 
 router.get('/student/profile',verifyToken,StudentController.profile);
