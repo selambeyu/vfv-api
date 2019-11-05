@@ -1,13 +1,13 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: vfv
+  name: api-deployment
 spec:
   selector:
     matchLabels:
       app: sample-service
       role: sample
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       name: api-deployment
@@ -41,10 +41,10 @@ spec:
             memory: "500Mi"
             cpu: "100m"
         imagePullPolicy: Always
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 3000
+        #readinessProbe:
+        #  httpGet:
+        #    path: /
+        #    port: 3000
         args: ['--env="HOST_IP=$(HOST_IP)"','--env="API_URL=$(API_URL)"','--env="MONGODB_URL=$(MONGODB_URL)"']
         ports:
         - name: payments
