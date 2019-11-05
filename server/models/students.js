@@ -26,23 +26,7 @@ const StudentSchema=mongoose.Schema({
     interest:{
         type:String,
         required:true
-    },
-    educationLevel:{
-        type:String,
-        required:true
-    },
-    bio:{
-        type:String
-    },
-    region:{
-        type:String
-    },
-    zone:{
-        type:String
-    },
-    werda:{
-        type:String
     }
 });
 
-module.exports=mongoose.model('StudentSchema',StudentSchema);
+module.exports=mongoose.model('Student',StudentSchema);

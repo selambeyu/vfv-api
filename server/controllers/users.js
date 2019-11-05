@@ -53,43 +53,65 @@ module.exports.register=(req,res)=>{
 
 
 
-module.exports.login=(req,res)=>{
-  const username=req.body.username;
-  const password=req.body.password;
-  user.findOne({username                                                                                                                                                                                                                                                                                                },(err,user)=>{
-    if(username!=user.username) return res.json({success:false,message:"wrong username"});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-    bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
-      if(err)res.json({success:false,message:"no user found"});
-      if(isMatch){
+// module.exports.login=(req,res)=>{
+//   const username=req.body.username;
+//   const password=req.body.password;
+//   user.findOne({username                                                                                                                                                                                                                                                                                                },(err,user)=>{
+//     if(username!=user.username) return res.json({success:false,message:"wrong username"});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+//     bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
+//       if(err)res.json({success:false,message:"no user found"});
+//       if(isMatch){
         
-        const token=jwt.sign({user:user},config.secret,{expiresIn:604880})
+//         const token=jwt.sign({user:user},config.secret,{expiresIn:604880})
        
-        // return res.json({success:true,token:token})
-        if(user.role=="professional"){
-          return res.json({
-            success:true,
-            token:token,
-            message:"Professional loged in"
-          });
-        }
-        if(user.role=="student"){
-          return res.json({
-            success:true,
-            token:token,
-            message:"Stuent log"
-          })
-        }
+//         // return res.json({success:true,token:token})
+//         if(user.role=="professional"){
+//           return res.json({
+//             success:true,
+//             token:token,
+//             message:"Professional loged in"
+//           });
+//         }
+//         if(user.role=="student"){
+//           return res.json({
+//             success:true,
+//             token:token,
+//             message:"Stuent log"
+//           })
+//         }
         
 
+//       }else{
+//         return res.json({success:false,message:"Wrong password"})
+//       }
+
+//     });
+//   })
+// };
+
+module.exports.login=(req,res)=>{
+  user.findOne({username:req.body.username}).then(result=>{
+    bcrypt.compare(req.body.password,result.password,(err,isMatch)=>{
+      if(err)throw err;
+      if(isMatch){
+        const token=jwt.sign({username:result.username,email:result.email,role:result.role},config.secret,{expiresIn:70000});
+        return res.json({
+          token:token,
+          role:result.role,
+          message:"logged in"
+        })
       }else{
-        return res.json({success:false,message:"Wrong password"})
+        return res.json({message:"Wrong password"})
       }
+    })
 
-    });
+  }).catch(err=>{
+    res.json({
+      result:err,
+      message:"user not found"
+    })
   })
-};
-
-
+}
 
 // /get authenticated user profile
 
@@ -99,7 +121,7 @@ module.exports.profile=(req,res)=>{
     if(err){
       res.sendStatus(403);
     }else{
-      if(authData.user.role==="professional"){
+      if(authData.role==="student"){
         res.json({
           message:"professional profile",
           authData

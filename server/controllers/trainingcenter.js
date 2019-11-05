@@ -9,7 +9,7 @@ module.exports.addInfo=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="trainingcenter"){
+            if(authData.role==="trainingcenter"){
                 trainingcenteinfo=new Trainingcenter({
                     userId:authData.user._id,
                     companyName:req.body.companyName,
@@ -38,12 +38,12 @@ module.exports.editProfile=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="trainingcenter"){
+            if(authData.role==="trainingcenter"){
                 Trainingcenter.findById(req.params._id,(err,result)=>{
                     if(err){
                         res.sendStatus(403);
                     }else{
-                        if(authData.user._id===result.userId){
+                        if(authData._id===result.userId){
                             Trainingcenter.findByIdAndUpdate({_id:result._id},req.body)
                             .then(result=>{
                                 res.json({result:result});

@@ -10,6 +10,7 @@ const QuestionController=require('../controllers/question');
 const AnswerController=require('../controllers/answer');
 const checkrole=require('../config/checkRole');
 const ImageController=require('../controllers/image');
+const verifyToken=require('../config/auth');
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
         cb(null,'./upload/');
@@ -36,7 +37,7 @@ fileFilter:fileFilter
 });
 
 
-const verifyToken=require('../config/auth');
+
 
 router.post('/upload',upload.single('image'),ImageController.upload);
 /**
@@ -108,7 +109,7 @@ router.get('/student/profile',verifyToken,StudentController.profile);
  * @apiSuccess {String} bio  Lastname of the User.
  *@apiSuccess {String} city  Lastname of the User.
  */
-router.post('/student/addInfo',verifyToken,StudentController.addInfo);
+router.post('/student/addInfo',checkrole(["student"]),StudentController.addInfo);
 /**
  * @api {put} /student/editprofile/:id Request User information
  * @apiName ProfileStudent

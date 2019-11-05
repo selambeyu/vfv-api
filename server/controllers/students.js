@@ -8,17 +8,19 @@ module.exports.addInfo=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="student"){
+            // Student.findOne({firstname:req.body}).then(stud=>{
+
+            // })
+            console.log("else")
+           
                 const student=new Student({
                     userId:authData.user.userId,
                     firstname:req.body.firstname,
                     lastname:req.body.lastname,
-                    professionType:req.body.professionType,
+                    profilePicture:req.body.profilePicture,
                     address:req.body.address,
-                    workPlace:req.body.workPlace,
-                    college:req.body.college,
-                    highschool:req.body.highschool,
-                    profilePicture:req.file    
+                    city:req.body.city,
+                    interest:req.body.interest
                 });
                 student.save()
                 .then(student=>{
@@ -28,18 +30,48 @@ module.exports.addInfo=(req,res)=>{
                         student:err
                     })
                 })
-            }
+            
         }
     })
 
 }
+
+
+// module.exports.addInfo=(req,res)=>{
+//     jwt.verify(req.token,config.secret,(err,authData)=>{
+//         if(err)res.sendStatus(403);
+//         if(authData.user.role==="student"){
+//             const student=new Student({
+//                 userId:authData.user.userId,
+//                  firstname:req.body.firstname,
+//                   lastname:req.body.lastname,
+//                   professionType:req.body.professionType,
+//                                     address:req.body.address,
+//                                     workPlace:req.body.workPlace,
+//                                     college:req.body.college,
+//                                     highschool:req.body.highschool,
+//                                     profilePicture:req.body.profilePicture   
+             
+//     });
+//     student.save().then(result=>{
+//         res.json({result:result})
+//     }).catch(err=>{
+//         res.json({result:err})
+//     })
+// }else{
+//     return res.json({message:"U are not permited"})
+// }
+// })
+// }
 
 module.exports.editProfile=(req,res)=>{
     jwt.verify(req.token,config.secret,(err,authData)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="student"){
+            console.log("Entered");
+            if(authData.user.role=="student"){
+                console.log("Entered inner");
                 Student.findById({_id:req.params.id}).then(result=>{
                     if(authData.user._id===result.userId){
                         Student.findByIdAndUpdate({_id:req.params.id},res.body).then(result=>{
@@ -55,22 +87,33 @@ module.exports.editProfile=(req,res)=>{
 }
 
 
+// module.exports.profile=(req,res)=>{
+//     jwt.verify(req.token,config.secret,(err,authData)=>{
+//         if(err){
+//             res.sendStatus(403);
+//         }else{
+//             Student.findById({_id:req.params}).then(result=>{
+//                 if(authData.user._id===result.userId){
+//                     res.json({
+//                         result:result
+//                     })
+//                 }else{
+//                     res.json({
+//                         result:"Unaurthorized"
+//                     })
+//                 }
+//             })
+//         }
+//     })
+// }
+
+
 module.exports.profile=(req,res)=>{
     jwt.verify(req.token,config.secret,(err,authData)=>{
         if(err){
-            res.sendStatus(403);
+            return res.sendStatus(403)
         }else{
-            Student.findById({_id:req.params}).then(result=>{
-                if(authData.user._id===result.userId){
-                    res.json({
-                        result:result
-                    })
-                }else{
-                    res.json({
-                        result:"Unaurthorized"
-                    })
-                }
-            })
+            return res.json({authData:authData})
         }
     })
 }
