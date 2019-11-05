@@ -4,21 +4,22 @@ const config=require('../config/config')
 
 
 
-module.exports.createQuestion=(req,res,next)=>{
+module.exports.createQuestion=(req,res)=>{
     jwt.verify(req.token,config.secret,(err,authData)=>{
         if(err){
           res.sendStatus(403);
         }else{
-            console.log(authData.user.role);
-            if(authData.user.role==="professional"){
-                const question=new Question({
+            
+            console.log(authData.role);
+            if(authData.role==="student"){
+                const question_txt=new Question({
                     question:req.body.question,
-                    askedBy:authData.user.username,
+                    askedBy:authData.username,
       
       
                 })
       
-                question.save()
+                question_txt.save()
                 .then(result=>{
                     res.json({
                         sucess:true,result:result
@@ -27,8 +28,6 @@ module.exports.createQuestion=(req,res,next)=>{
                 .catch(err=>{
                     res.json({success:false,result:err})
                 })
-            }else{
-                res.sendStatus(403);
             }
           
           
@@ -66,12 +65,12 @@ module.exports.updateQuestion=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="professional"){
+            if(authData.role==="student"){
                 Question.findById(req.params.id).then(result=>{
-                    if(authData.user.username===result.askedBy){
+                    if(authData.username===result.askedBy){
                         // result.question=req.body.question;
-                        Question.update({question:req.body},req.body).then(result=>{
-                            res.json({result:result,message:"updated"});
+                        Question.findByIdAndUpdate({_id:req.params.id},req.body).then(question=>{
+                            res.json({question:question,message:"updated"});
                         }).catch(err=>{
                             res.json({result:err});
                         });
@@ -91,35 +90,50 @@ module.exports.updateQuestion=(req,res)=>{
 }
 
 
-module.exports.deleteQuestion=(req,res)=>{
-    jwt.verify(req.token,config.secret,(err,authData)=>{
-        Question.findByIdAndDelete({_id:req.params.id})
-        .then(result=>{
-            res.json({success:true,result:result,message:"the question askedby"+authData.user.username+"is deleted"})
-        }).catch(err=>{
-            res.json({success:false,result:err})
-        })
-    })
-}
+
+
+// module.exports.deleteQuestion=(req,res)=>{
+//     jwt.verify(req.token,config.secret,(err,authData)=>{
+//         if(err){
+//             res.sendStatus(403);
+//         }else{
+//             if(authData.role==="student"){
+//                  Question.findById(req.params.id)
+//         .then(result=>{
+//             if(authData.username===result.username){
+//             Question.findByIdAndDelete({_id:req.params.id}).then(question=>{
+//                 res.json({question:question,message:"Deleted"})
+//             })
+
+//         }).catch(err=>{
+//             res.json({result :err})
+//         })
+//             }
+//         }
+//     }
+//     })
+// }
 
 module.exports.deleteQuestion=(req,res)=>{
     jwt.verify(req.token,config.secret,(err,authData)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="professional"){
-                 Question.findById(req.params.id)
-        .then(question=>{
-            Question.remove(question).then(question=>{
-                res.json({question:question})
-            })
-
-        }).catch(err=>{
-            res.json({question :err})
-        })
+            if(authData.role==="student"){
+                Question.findById({_id:req.params.id}).then(result=>{
+                    if(authData.username===result.askedBy){
+                        Question.findByIdAndDelete({_id:req.params.id}).then(question=>{
+                            res.json({question:question,message:"Deleted"})
+                        }).catch(err=>{
+                            res.json({question:err})
+                        })
+                    }
+                }).catch(err=>{
+                    res.json({
+                        result:err
+                    })
+                })
             }
         }
-       
     })
 }
-

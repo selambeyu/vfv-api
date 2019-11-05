@@ -5,9 +5,7 @@ const QuestionSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    answer:{
-        type:String
-    },
+    
     askedBy:{
         type:String,
         unique:true

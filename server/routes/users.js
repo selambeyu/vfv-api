@@ -95,7 +95,7 @@ router.get('/profile',verifyToken,UserController.profile);
  * @apiSuccess {String} role  Lastname of the User.
  *@apiSuccess {String} password  Lastname of the User.
  */
-
+router.get('/student/getStudent',verifyToken,StudentController.getStudent);
 router.get('/student/profile',verifyToken,StudentController.profile);
 /**
  * @api {post} /student/addinfo Request User information
@@ -109,7 +109,7 @@ router.get('/student/profile',verifyToken,StudentController.profile);
  * @apiSuccess {String} bio  Lastname of the User.
  *@apiSuccess {String} city  Lastname of the User.
  */
-router.post('/student/addInfo',checkrole(["student"]),StudentController.addInfo);
+router.post('/student/addInfo',verifyToken,StudentController.addInfo);
 /**
  * @api {put} /student/editprofile/:id Request User information
  * @apiName ProfileStudent

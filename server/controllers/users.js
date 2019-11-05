@@ -94,7 +94,7 @@ module.exports.login=(req,res)=>{
     bcrypt.compare(req.body.password,result.password,(err,isMatch)=>{
       if(err)throw err;
       if(isMatch){
-        const token=jwt.sign({username:result.username,email:result.email,role:result.role},config.secret,{expiresIn:70000});
+        const token=jwt.sign({_id:result._id,username:result.username,email:result.email,role:result.role},config.secret,{expiresIn:70000});
         return res.json({
           token:token,
           role:result.role,

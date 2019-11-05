@@ -3,79 +3,48 @@ const Student=require('../models/students');
 const config =require('../config/config');
 const jwt=require('jsonwebtoken');
 
+
+
+
 module.exports.addInfo=(req,res)=>{
-    jwt.verfy(req.token,config.secret,(err,authData)=>{
+    jwt.verify(req.token,config.secret,(err,authData)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            // Student.findOne({firstname:req.body}).then(stud=>{
-
-            // })
-            console.log("else")
-           
+            if(authData.role==="student"){
                 const student=new Student({
-                    userId:authData.user.userId,
+                    userId:authData._id,
                     firstname:req.body.firstname,
                     lastname:req.body.lastname,
                     profilePicture:req.body.profilePicture,
                     address:req.body.address,
                     city:req.body.city,
                     interest:req.body.interest
-                });
-                student.save()
-                .then(student=>{
-                    res.json({student:student})
-                }).catch(err=>{
-                    res.json({
-                        student:err
-                    })
-                })
-            
+        });
+        student.save().then(result=>{
+            res.json({result:result,userId:result.userId})
+        }).catch(err=>{
+            res.json({result:err})
+        })
         }
-    })
 
+        
 }
-
-
-// module.exports.addInfo=(req,res)=>{
-//     jwt.verify(req.token,config.secret,(err,authData)=>{
-//         if(err)res.sendStatus(403);
-//         if(authData.user.role==="student"){
-//             const student=new Student({
-//                 userId:authData.user.userId,
-//                  firstname:req.body.firstname,
-//                   lastname:req.body.lastname,
-//                   professionType:req.body.professionType,
-//                                     address:req.body.address,
-//                                     workPlace:req.body.workPlace,
-//                                     college:req.body.college,
-//                                     highschool:req.body.highschool,
-//                                     profilePicture:req.body.profilePicture   
-             
-//     });
-//     student.save().then(result=>{
-//         res.json({result:result})
-//     }).catch(err=>{
-//         res.json({result:err})
-//     })
-// }else{
-//     return res.json({message:"U are not permited"})
-// }
-// })
-// }
+})
+}
 
 module.exports.editProfile=(req,res)=>{
     jwt.verify(req.token,config.secret,(err,authData)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            console.log("Entered");
-            if(authData.user.role=="student"){
-                console.log("Entered inner");
+            if(authData.role==="student"){
                 Student.findById({_id:req.params.id}).then(result=>{
-                    if(authData.user._id===result.userId){
-                        Student.findByIdAndUpdate({_id:req.params.id},res.body).then(result=>{
-                            res.json({result:result})
+                    if(authData._id===result.userId){
+                        Student.findByIdAndUpdate(req.params.id,{$set:req.body}).then(student=>{
+                            res.json({student:student})
+                        }).catch(err=>{
+                            res.json({student:err})
                         })
                     }
                 }).catch(err=>{
@@ -110,72 +79,19 @@ module.exports.editProfile=(req,res)=>{
 
 module.exports.profile=(req,res)=>{
     jwt.verify(req.token,config.secret,(err,authData)=>{
-        if(err){
-            return res.sendStatus(403)
-        }else{
-            return res.json({authData:authData})
-        }
+        if(err){}
     })
 }
 
-// module.exports={
-//     create:(req,res)=>{
-//         const student=new StudentModel({
-//             firstname:req.body.firstname,
-//             lastname:req.body.lastname,
-//             professionType:req.body.professionType,
-//             address:req.body.address,
-//             workPlace:req.body.workPlace,
-//             college:req.body.college,
-//             highschool:req.body.highschool,
-//             profilePicture:req.body.profilePicture
-//         });
-//        student.save()
-//        .then(result=>{
-//            res.json({success:true,result:result});
-//        })
-//        .catch(err=>{
-//            res.json({success:false,result:err});
-//        });
-//     },
-//     update:(req,res)=>{
-//         StudentModel.update({_id:req.body._id},req.body)
-//         .then(student=>{
-//             if(!student) res.json({success:false,result:"professional does not exit"});
-//             res.json(student)
-//         })
-//         .catch(err=>{
-//             res.json({succes:true,result:err})
-//         })
-//     },
-//     getData:(req,res)=>{
-//         StudentModel.find({})
-//         .then(result=>{
-//             if(!result)res.json({success:false,result:"No result found"})
-//             res.json({success:true,result:result})
-//         })
-//         .catch(err=>{
-//             res.json({success:false,result:err});
-//         })
-//     },
-//     delete:(req,res)=>{
-//         StudentModel.remove({_id:req.body._id})
-//         .then(result=>{
-//             if(!result)res.json({succes:false,result:"no user with this id"})
-//             res.json({success:true,result:result})
-//         })
-//         .catch(err=>{
-//             res.json({success:false,result:err})
-//         })
-//     },
-//     getStudentByUsername:(req,res)=>{
-//         StudentModel.findOne({username:req.body.username}).then(result=>{
-//             if(!username) return res.json({succes:false,result:"Please enter the usename"});
-//             return res.json({succes:true,result:result});
-//         }).catch(err=>{
-//             return res.json({success:true,result:err});
-//         });
-//     }
 
-
-// }
+module.exports.getStudent=(req,res)=>{
+    jwt.verify(req.token,config.secret,(err,authData)=>{
+        Student.find().then(student=>{
+            res.json({
+                student:student
+            })
+        }).catch(err=>{
+            res.json({student:err})
+        })
+    })
+}
