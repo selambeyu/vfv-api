@@ -31,12 +31,12 @@ module.exports.answerQuestion=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="professional"){
+            if(authData.role==="professional"){
                 let questionId=req.params.id;
                 let answer=new Answer({
                     question_Id:questionId,
-                    answer:req.body.answer,
-                    answeredBy:authData.user.username
+                    questionAnswer:req.body.questionAnswer,
+                    answeredBy:authData.username
                 })
                 answer.save()
                 .then(answer=>{
@@ -59,15 +59,24 @@ module.exports.updateAnswer=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="professional"){
-                
-                Question.findById(req.params.id,(err,result)=>{
-                   if(err){
-                       res.sendStatus(403);
-                   }else{
-                      res.json({result:result})
-                   }
+            if(authData.role==="professional"){
+                Answer.findById({_id:req.params.id}).then(result=>{
+                    if(authData.username===result.answeredBy){
+                        Answer.findByIdAndUpdate(req.params.id,req.body).then(answer=>{
+                            res.json({answer:answer,message:"updated"})
+                        }).catch(err=>{
+                            res.json({
+                                answer:err,
+                                message:"Not Updated"
+                            })
+                        })
+                    }
+                }).catch(err=>{
+                    res.json({result:err})
                 })
+        
+            }else{
+                res.json({message:"You have no permission for this"})
             }
         }
     })

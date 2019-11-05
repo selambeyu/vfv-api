@@ -46,7 +46,7 @@ jwt.verify(req.token,config.secret,(err,authData)=>{
     }else{
         Question.find()
 .then(result=>{
-    res.json({success:true,result:result,authData});
+    res.json({success:true,result:result});
 })
 .catch(err=>{
     res.json({success:true,result:err})
@@ -92,27 +92,6 @@ module.exports.updateQuestion=(req,res)=>{
 
 
 
-// module.exports.deleteQuestion=(req,res)=>{
-//     jwt.verify(req.token,config.secret,(err,authData)=>{
-//         if(err){
-//             res.sendStatus(403);
-//         }else{
-//             if(authData.role==="student"){
-//                  Question.findById(req.params.id)
-//         .then(result=>{
-//             if(authData.username===result.username){
-//             Question.findByIdAndDelete({_id:req.params.id}).then(question=>{
-//                 res.json({question:question,message:"Deleted"})
-//             })
-
-//         }).catch(err=>{
-//             res.json({result :err})
-//         })
-//             }
-//         }
-//     }
-//     })
-// }
 
 module.exports.deleteQuestion=(req,res)=>{
     jwt.verify(req.token,config.secret,(err,authData)=>{

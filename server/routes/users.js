@@ -141,7 +141,7 @@ router.put('/student/editprofile/:id',verifyToken,StudentController.editProfile)
 
 router.get('/student/viewArticle',verifyToken,ArticelController.getArticle);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {get}  /student/viewQuestionRequest User information
  * @apiName GetQuestion
  * @apiGroup Student
  *
@@ -154,7 +154,7 @@ router.get('/student/viewArticle',verifyToken,ArticelController.getArticle);
  */
 router.get('/student/viewQuestion',verifyToken,QuestionController.getQuestion);
 /**
- * @api {post} /student/addinfo Request Question information
+ * @api {post} /student/createQuestion Request Question information
  * @apiName PostQuestion
  * @apiGroup Student
  * 
@@ -198,7 +198,7 @@ router.put('/student/updateQuestion/:id',verifyToken,QuestionController.updateQu
 router.delete('/student/deleteQuestion/:id',verifyToken,QuestionController.deleteQuestion);
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {get} /student/ArticleByAuthor/:author fo Request User information
  * @apiName ProfileStudent
  * @apiGroup Student
  *
@@ -212,7 +212,7 @@ router.delete('/student/deleteQuestion/:id',verifyToken,QuestionController.delet
 router.get('/student/ArticleByAuthor/:author',verifyToken,ArticelController.getByauthor);
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {get} /student/ArticleByTitle/:title Request User information
  * @apiName ProfileStudent
  * @apiGroup Student
  *
@@ -226,7 +226,7 @@ router.get('/student/ArticleByAuthor/:author',verifyToken,ArticelController.getB
 router.get('/student/ArticleByTitle/:title',verifyToken,ArticelController.getByTitle);
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /student/gettrainingcenter/:companyName Request User information
  * @apiName ProfileStudent
  * @apiGroup Student
  *
@@ -239,7 +239,7 @@ router.get('/student/ArticleByTitle/:title',verifyToken,ArticelController.getByT
  */
 router.get('/student/gettrainingcenter/:companyName',verifyToken,TrainingCenterController.getTrainingcenterByName);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} student/gettrainingceneter Request User information
  * @apiName ProfileStudent
  * @apiGroup Student
  *
@@ -254,7 +254,7 @@ router.get('/student/gettrainingceneter',verifyToken,TrainingCenterController.ge
 
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/profile Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -268,7 +268,7 @@ router.get('/student/gettrainingceneter',verifyToken,TrainingCenterController.ge
 
 router.get('/professional/profile',verifyToken,ProfessionalController.profile);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/addInfo Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -281,11 +281,10 @@ router.get('/professional/profile',verifyToken,ProfessionalController.profile);
  */
 router.post('/professional/addInfo',verifyToken,ProfessionalController.addInfo);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} //professional/editProfile Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
-
  *
  * @apiSuccess {String} firstname Firstname of the User.
  * @apiSuccess {String} lastname  Lastname of the User.
@@ -294,7 +293,7 @@ router.post('/professional/addInfo',verifyToken,ProfessionalController.addInfo);
  */
 router.put('/professional/editProfile',verifyToken,ProfessionalController.editProfile);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} //professional/addArticle Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -307,7 +306,7 @@ router.put('/professional/editProfile',verifyToken,ProfessionalController.editPr
  */
 router.post('/professional/addArticle',verifyToken,ArticelController.addArticle);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/viewArticle Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -320,7 +319,7 @@ router.post('/professional/addArticle',verifyToken,ArticelController.addArticle)
  */
 router.get('/professional/viewArticle',verifyToken,ArticelController.getArticle);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/editArticle/:id Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -331,9 +330,9 @@ router.get('/professional/viewArticle',verifyToken,ArticelController.getArticle)
  * @apiSuccess {String} bio  Lastname of the User.
  *@apiSuccess {String} city  Lastname of the User.
  */
-router.put('/professional/editArticle',verifyToken,ArticelController.editArticle);
+router.put('/professional/editArticle/:id',verifyToken,ArticelController.editArticle);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/deleteArticle/:id Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -344,9 +343,9 @@ router.put('/professional/editArticle',verifyToken,ArticelController.editArticle
  * @apiSuccess {String} bio  Lastname of the User.
  *@apiSuccess {String} city  Lastname of the User.
  */
-router.delete('/professional/deleteArticle',verifyToken,ArticelController.deleteArticle);
+router.delete('/professional/deleteArticle/:id',verifyToken,ArticelController.deleteArticle);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/viewQuestion Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -359,7 +358,7 @@ router.delete('/professional/deleteArticle',verifyToken,ArticelController.delete
  */
 router.get('/professional/viewQuestion',verifyToken,QuestionController.getQuestion);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/viewArticel Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -372,7 +371,7 @@ router.get('/professional/viewQuestion',verifyToken,QuestionController.getQuesti
  */
 router.get('/professional/viewArticel',verifyToken,ArticelController.getArticle);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/articleByAuthor/:author Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -385,7 +384,7 @@ router.get('/professional/viewArticel',verifyToken,ArticelController.getArticle)
  */
 router.get('/professional/articleByAuthor/:author',verifyToken,ArticelController.getByauthor);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/articleByTitle/:title Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -425,7 +424,7 @@ router.get('/professional/articleByTitle/:title',verifyToken,ArticelController.g
  */
 router.get('/professional/viewAnswer',verifyToken,AnswerController.viewAnswer);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/answerQuestion/:id Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -439,7 +438,7 @@ router.get('/professional/viewAnswer',verifyToken,AnswerController.viewAnswer);
 router.post('/professional/answerQuestion/:id',verifyToken,AnswerController.answerQuestion);
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/updateAnswer/:id' Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *

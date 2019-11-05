@@ -7,8 +7,10 @@ module.exports.addArticle=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            const newArticle=new ArticleModel({
-                                author:authData.user.username,
+            if(authData.role==="professional"){
+
+                 const newArticle=new ArticleModel({
+                                author:authData.username,
                                 title:req.body.title,
                                 content:req.body.content,
                                 comment:req.body.comment
@@ -24,6 +26,11 @@ module.exports.addArticle=(req,res)=>{
                                 })
                             })
 
+
+            }else{
+                res.json({message:"you don't have permission for this"})
+            }
+           
         }
     })
 
@@ -34,9 +41,11 @@ module.exports.editArticle=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            ArticleModel.findById({_id:req.params.id}).then(result=>{
-                if(authData.user.username===result.author){
-                    ArticleModel.findByIdAndUpdate({_id:req.params},{$set:req.body}).then(article=>{
+
+            if(authData.role==="professional"){
+                ArticleModel.findById({_id:req.params.id}).then(result=>{
+                if(authData.username===result.author){
+                    ArticleModel.findByIdAndUpdate({_id:req.params.id},{$set:req.body}).then(article=>{
                         res.json({
                             article:article
                         })
@@ -52,6 +61,12 @@ module.exports.editArticle=(req,res)=>{
                     result:err
                 })
             })
+            }else{
+                res.json({
+                    message:"You don't have permmison for this"
+                })
+            }
+            
         }
     })
 
@@ -63,16 +78,19 @@ module.exports.deleteArticle=(req,res)=>{
             res.sendStatus(403);
         }else{
             ArticleModel.findById({_id:req.params.id}).then(result=>{
-                if(authData.user.username===result.author){
-                    ArticleModel.findByIdAndDelete({_id:req.params.id}).then(article=>{
+                if(authData.username===result.author){
+                    ArticleModel.findByIdAndDelete({_id:req.params.id}).then(success=>{
                         res.json({
-                            article:article
+                            success:success,
+                            message:"Deleted"
                         })
                     }).catch(err=>{
                         res.json({
-                            article:err
+                            success:err
                         })
                     })
+                }else{
+                    res.json({message:"You have no permission for this"})
                 }
             }).catch(err=>{
                 res.json({
@@ -111,6 +129,17 @@ module.exports.getByauthor=(req,res)=>{
 }
 
 module.exports.getArticle=(req,res)=>{
+    jwt.verify(req.token,config.secret,(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            ArticleModel.find().then(article=>{
+                res.json({article:article});
+            }).catch(err=>{
+                res.json({article:err})
+            })
+        }
+    })
     
 }
 
@@ -136,83 +165,3 @@ module.exports.searchArticle=(req,res)=>{
     })
 }
 
-
-
-// module.exports={
-//     create:(req,res)=>{
-
-//             const articel=new ArticleModel({
-//                 author:req.body.author,
-//                 title:req.body.title,
-//                 content:req.body.content,
-//                 comment:req.body.comment
-//             });
-//            articel.save()
-//            .then(result=>{
-//                res.json({success:true,result:result});
-//            })
-//            .catch(err=>{
-//                res.json({success:false,result:err});
-//            });
-
-        
-//     }
-// ,
-//     update:(req,res)=>{
-//         ArticleModel.update({_id:req.body._id},req.body)
-//         .then(articel=>{
-//             if(!articel) res.json({success:false,result:"professional does not exit"});
-//             res.json(articel)
-//         })
-//         .catch(err=>{
-//             res.json({succes:true,result:err})
-//         })
-//     },
-//     getData:(req,res)=>{
-//         ArticleModel.find({})
-//         .then(result=>{
-//             if(!result)res.json({success:false,result:"No result found"})
-//             res.json({success:true,result:result})
-//         })
-//         .catch(err=>{
-//             res.json({success:false,result:err});
-//         })
-//     },
-//     getById:(req,res)=>{
-        
-//         ArticleModel.findById({_id:req.body._id}).then(result=>{
-//             if(!result)res.json({success:false,result:"No result fount"})
-//             res.json({succes:true,result:result});
-//         }).catch(err=>{
-//             res.json({succes:false,result:err});
-//         })
-//     },
-//     getByauthor:(req,res)=>{
-//         ArticleModel.findOne({author:req.body.author}).then(result=>{
-//             if(!result)res.json({succes:false,result:"No result found"})
-//             res.json({succes:true,result:result});
-//         }).catch(err=>{
-//             res.json({succes:false,result:err});
-//         })
-//     },
-//     getByTitle:(req,res)=>{
-//         ArticleModel.findOne({title:req.body.title}).then(result=>{
-//             if(!title)res.json({succes:false,result:"NO result Found"})
-//             res.json({succes:true,result:result});
-//         }).catch(err=>{
-//             res.json({succes:false,result:err});
-//         })
-//     }
-//     ,
-//     delete:(req,res)=>{
-//         ArticleModel.remove({_id:req.body._id})
-//         .then(result=>{
-//             if(!result)res.json({succes:false,result:"no user with this id"})
-//             res.json({success:true,result:result})
-//         })
-//         .catch(err=>{
-//             res.json({success:false,result:err})
-//         })
-//     }
-
-// }
