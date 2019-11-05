@@ -74,7 +74,7 @@ spec:
       steps{
         container('kubectl') {
         // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#gcr.io/cloud-solutions-images/sample:1.0.0#${IMAGE_TAG}#' ./k8s/staging/*.yaml")
+          sh("sed -i.bak 's#gcr.io/cloud-solutions-images/vfv:1.0.0#${IMAGE_TAG}#' ./k8s/staging/*.yaml")
           step([$class: 'KubernetesEngineBuilder',namespace:'staging', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/services', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
           step([$class: 'KubernetesEngineBuilder',namespace:'staging', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/staging', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
           sh("echo http://`kubectl --namespace=staging get service/${FE_SVC_NAME} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${FE_SVC_NAME}")
