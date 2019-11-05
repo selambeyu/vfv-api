@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: sample-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 3000
