@@ -1,13 +1,13 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: vfv
+  name: api-deployment
 spec:
   selector:
     matchLabels:
       app: sample-service
       role: sample
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       name: api-deployment
