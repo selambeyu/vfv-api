@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: sample-service
       role: sample
-  replicas: 2
+  replicas: 0
   template:
     metadata:
       name: api-deployment
