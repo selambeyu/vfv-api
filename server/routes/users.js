@@ -14,7 +14,7 @@ const verifyToken=require('../config/auth');
 
 /**
  * @api {post} /register Request User information
- * @apiName PostUser
+ * @apiName Registerser
  * @apiGroup User
  *
  * @apiSuccess {String} username Firstname of the User.
@@ -37,7 +37,7 @@ router.post('/register',UserController.register);
 router.post('/login',UserController.login);
 /**
  * @api {get} /profile Request Student information
- * @apiName loginUser
+ * @apiName GetProfile
  * @apiGroup User
  *
  * 
@@ -86,7 +86,7 @@ router.post('/student/addInfo',verifyToken,StudentController.addInfo);
  * @api {put} /student/editprofile/:id Request User information
  * @apiName ProfileStudent
  * @apiGroup Student
- * 
+ * @apiParam {String} id unique id.
  *@apiParam {String} firsname Students .
  *@apiParam {String} firsname Students .
  * @apiParam {String} city of Students .
@@ -104,8 +104,7 @@ router.put('/student/editprofile/:id',verifyToken,StudentController.editProfile)
  * @apiName ViewArticle
  * @apiGroup Student
  *
-
- *
+* 
  * @apiSuccess {String} author  of the Article.
  * @apiSuccess {String} title  of the Article.
  * @apiSuccess {String} content  of the Article.
@@ -115,47 +114,49 @@ router.put('/student/editprofile/:id',verifyToken,StudentController.editProfile)
 router.get('/student/viewArticle',verifyToken,ArticelController.getArticle);
 /**
  * @api {post} /student/addinfo Request User information
- * @apiName ProfileStudent
+ * @apiName GetQuestion
  * @apiGroup Student
  *
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} quetion  of the Student.
+ * @apiSuccess {String} AskedBy  name  of the Student who asks question.
+ * @apiSuccess {Number} createdDate   of the Question.
+ *
  */
 router.get('/student/viewQuestion',verifyToken,QuestionController.getQuestion);
 /**
- * @api {post} /student/addinfo Request User information
- * @apiName ProfileStudent
+ * @api {post} /student/addinfo Request Question information
+ * @apiName PostQuestion
  * @apiGroup Student
+ * 
+ * @apiParam {String} question of Students .
+ * 
  *
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} Question  of the Student.
+ * @apiSuccess {String} Akedby   Student.
+ * 
  */
 router.post('/student/createQuestion',verifyToken,QuestionController.createQuestion);
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {put} /student/updateQuestion/:id Request question information
  * @apiName ProfileStudent
  * @apiGroup Student
  *
-
+*@apiParam {String } id of the question
+*@apiParam {Strin } question of the student
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} Question of the Student.
+ * @apiSuccess {bollean} succes=true  Success message.
+ * 
  */
 router.put('/student/updateQuestion/:id',verifyToken,QuestionController.updateQuestion);
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {delete} /student/deleteQuestion Request Question information
  * @apiName ProfileStudent
  * @apiGroup Student
  *

@@ -908,7 +908,7 @@ define({ "api": [
     "type": "post",
     "url": "/student/addinfo",
     "title": "Request User information",
-    "name": "ProfileStudent",
+    "name": "GetQuestion",
     "group": "Student",
     "success": {
       "fields": {
@@ -917,29 +917,65 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "quetion",
+            "description": "<p>of the Student.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "AskedBy",
+            "description": "<p>name  of the Student who asks question.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "createdDate",
+            "description": "<p>of the Question.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/routes/users.js",
+    "groupTitle": "Student"
+  },
+  {
+    "type": "post",
+    "url": "/student/addinfo",
+    "title": "Request Question information",
+    "name": "PostQuestion",
+    "group": "Student",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "question",
+            "description": "<p>of Students .</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Question",
+            "description": "<p>of the Student.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "bio",
-            "description": "<p>Lastname of the User.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "city",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "Akedby",
+            "description": "<p>Student.</p>"
           }
         ]
       }
@@ -1037,9 +1073,9 @@ define({ "api": [
     "groupTitle": "Student"
   },
   {
-    "type": "post",
-    "url": "/student/addinfo",
-    "title": "Request User information",
+    "type": "delete",
+    "url": "/student/deleteQuestion",
+    "title": "Request Question information",
     "name": "ProfileStudent",
     "group": "Student",
     "success": {
@@ -1081,55 +1117,31 @@ define({ "api": [
     "groupTitle": "Student"
   },
   {
-    "type": "post",
-    "url": "/student/addinfo",
-    "title": "Request User information",
+    "type": "put",
+    "url": "/student/updateQuestion/:id",
+    "title": "Request question information",
     "name": "ProfileStudent",
     "group": "Student",
-    "success": {
+    "parameter": {
       "fields": {
-        "Success 200": [
+        "Parameter": [
           {
-            "group": "Success 200",
+            "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "id",
+            "description": "<p>of the question</p>"
           },
           {
-            "group": "Success 200",
-            "type": "String",
+            "group": "Parameter",
+            "type": "Strin",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "bio",
-            "description": "<p>Lastname of the User.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "city",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "question",
+            "description": "<p>of the student</p>"
           }
         ]
       }
     },
-    "version": "0.0.0",
-    "filename": "server/routes/users.js",
-    "groupTitle": "Student"
-  },
-  {
-    "type": "post",
-    "url": "/student/addinfo",
-    "title": "Request User information",
-    "name": "ProfileStudent",
-    "group": "Student",
     "success": {
       "fields": {
         "Success 200": [
@@ -1137,29 +1149,16 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "Question",
+            "description": "<p>of the Student.</p>"
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "bollean",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "bio",
-            "description": "<p>Lastname of the User.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "city",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "succes",
+            "defaultValue": "true",
+            "description": "<p>Success message.</p>"
           }
         ]
       }
@@ -1336,6 +1335,13 @@ define({ "api": [
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>unique id.</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -1700,10 +1706,10 @@ define({ "api": [
     "groupTitle": "TrainingCenter"
   },
   {
-    "type": "post",
-    "url": "/register",
-    "title": "Request User information",
-    "name": "PostUser",
+    "type": "get",
+    "url": "/profile",
+    "title": "Request Student information",
+    "name": "GetProfile",
     "group": "User",
     "success": {
       "fields": {
@@ -1744,10 +1750,10 @@ define({ "api": [
     "groupTitle": "User"
   },
   {
-    "type": "get",
-    "url": "/profile",
-    "title": "Request Student information",
-    "name": "loginUser",
+    "type": "post",
+    "url": "/register",
+    "title": "Request User information",
+    "name": "Registerser",
     "group": "User",
     "success": {
       "fields": {
