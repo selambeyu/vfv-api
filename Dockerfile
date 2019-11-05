@@ -1,13 +1,8 @@
-FROM node:10
-
-WORKDIR /usr/app
-
-COPY package*.json ./
-
+FROM node:12.13.0-alpine
+WORKDIR /app
+COPY package.json /app
 RUN npm install
-
-COPY ./ ./
-
+COPY . /app
+ENV  MONGODB_URL=MONGODB_URL
 EXPOSE 3000
-
-CMD ["node", "app"]
+CMD node app
