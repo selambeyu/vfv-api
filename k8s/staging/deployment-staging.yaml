@@ -45,7 +45,7 @@ spec:
           httpGet:
             path: /
             port: 3000
-        #args: ['--env="HOST_IP=$(HOST_IP)"','--env="API_URL=$(API_URL)"','--env="MONGODB_URL=$(MONGODB_URL)"']
+        args: ['--env="HOST_IP=$(HOST_IP)"','--env="API_URL=$(API_URL)"','--env="MONGODB_URL=$(MONGODB_URL)"']
         ports:
         - name: payments
           containerPort: 3000
