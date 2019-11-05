@@ -18,7 +18,7 @@ module.exports.addInfo=(req,res)=>{
                     workPlace:req.body.workPlace,
                     college:req.body.college,
                     highschool:req.body.highschool,
-                    profilePicture:req.body.file    
+                    profilePicture:req.file    
                 });
                 student.save()
                 .then(student=>{

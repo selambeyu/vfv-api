@@ -1,4 +1,5 @@
 const  express=require('express');
+const multer=require('multer');
 const router=express.Router();
 const UserController=require('../controllers/users');
 const StudentController=require('../controllers/students');
@@ -8,10 +9,36 @@ const ArticelController=require('../controllers/articles');
 const QuestionController=require('../controllers/question');
 const AnswerController=require('../controllers/answer');
 const checkrole=require('../config/checkRole');
+const ImageController=require('../controllers/image');
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null,'./upload/');
+    },
+    filename:function(req, file, cb){
+        cb(null, file.originalname);
+    }
+});
+
+  const fileFilter = (req,file,cb) =>{
+    if(file.mimetype === 'image/jpeg' || 'image/png'){
+     cb(null, true);
+    }else{
+        cb(null, flase);
+    }
+    
+};
+   const upload = multer({
+    storage: storage,
+    limits:{
+    fileSize:1024 * 1024 * 5
+},
+fileFilter:fileFilter
+});
+
 
 const verifyToken=require('../config/auth');
 
-
+router.post('/upload',upload.single('image'),ImageController.upload);
 /**
  * @api {post} /register Request User information
  * @apiName Registerser

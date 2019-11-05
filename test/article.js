@@ -31,7 +31,7 @@ chai.use(chaiHttp);
             // console.log ("Got",result.body.data.length, " docs")
             console.log ("Result Body:", result.body);
             
-            done()
+            // done()
         })
 })
 
@@ -85,7 +85,7 @@ it('it should post newu article', (done) => {
                       req.body.should.have.property('content'); 
                       req.body.should.have.property('title');
                       // res.body.comment.should.have.property('created_at');
-          done()
+          // done()
         });
   });
 });
