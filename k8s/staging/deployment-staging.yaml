@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: vfv
       role: api
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       name: api-deployment
