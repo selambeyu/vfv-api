@@ -24,7 +24,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: mongo-secret
-                key: MONGODB_URL
+                key: MONGOLAB_URI
          # - name: API_URL
           #  valueFrom:
           #    secretKeyRef:
