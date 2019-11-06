@@ -8,7 +8,7 @@ const TrainingCenterController=require('../controllers/trainingcenter');
 const ArticelController=require('../controllers/articles');
 const QuestionController=require('../controllers/question');
 const AnswerController=require('../controllers/answer');
-const checkrole=require('../config/checkRole');
+// const checkrole=require('../config/checkRole');
 const ImageController=require('../controllers/image');
 const verifyToken=require('../config/auth');
 const storage = multer.diskStorage({
@@ -39,16 +39,36 @@ fileFilter:fileFilter
 
 
 
-router.post('/upload',upload.single('image'),ImageController.upload);
+// router.post('/upload',upload.single('image'),ImageController.upload);
 /**
- * @api {post} /register Request User information
- * @apiName Registerser
+ * @api {post} /register  User Registration
+ * @apiName RegisteUser
  * @apiGroup User
  *
- * @apiSuccess {String} username Firstname of the User.
- * @apiSuccess {String} email  Lastname of the User.
- * @apiSuccess {String} role  Lastname of the User.
- *@apiSuccess {String} password  Lastname of the User.
+ * @apiSuccess {String} usernam of the User.
+ * @apiSuccess {String} role   of the User.
+ * @apiSuccess {String} email   of the User.
+ * 
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      success:true,
+ *      result:[{
+ *       "username": "melkamb",
+ *       "email": "melkamb3392beyu@gmail.com",
+ *        "role":"student"
+ *     }],
+ *      "message":"User Registered successfuly"
+ *     
+ *
+ * @apiError UserNotfound.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "success":false,
+ *         "result":err
+ *     }
+ *
  */
 router.post('/register',UserController.register);
 
@@ -56,10 +76,29 @@ router.post('/register',UserController.register);
  * @api {post} /login Request User information
  * @apiName loginUser
  * @apiGroup User
+ * 
+ * @apiParams {String } username of User
+ * @apiParams {String } password of User
+ *
+ *  @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      success:true,
+ *      token:token
+ *
+ *  @apiError UserNotRegistered .
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "success":false,
+ *         "result":err
+ *     }
+ *     
  *
 
  *
- * @apiSuccess {String} token Firstname of the User.
+ * @apiSuccess {String} token  the User.
+ * @apiSuccess {String}
 
  */
 router.post('/login',UserController.login);

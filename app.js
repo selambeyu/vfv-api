@@ -73,7 +73,7 @@ app.use(passport.session());
 
 
 app.get('/',(req,res)=>{
-  console("work");
+  // console("work");
   res.send("it is working ");
 });
 app.use('/api/users', usersRouter);
