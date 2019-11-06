@@ -539,17 +539,18 @@ router.get('/professional/articleByTitle/:title',verifyToken,ArticelController.g
  *
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} answer Firstname of the User.
+ * @apiSuccess {String} answeredBy  Lastname of the User.
+ *
  */
 router.get('/professional/viewAnswer',verifyToken,AnswerController.viewAnswer);
 /**
- * @api {post} /professional/answerQuestion/:id Request User information
- * @apiName ProfileStudent
+ * @api {post} /professional/answerQuestion/:id post answer 
+ * @apiName answerQuestion
  * @apiGroup Professional
- *
+ * 
+ * 
+ *@apiParams {String} 
 
  *
  * @apiSuccess {String} firstname Firstname of the User.
@@ -573,21 +574,10 @@ router.post('/professional/answerQuestion/:id',verifyToken,AnswerController.answ
  */
 router.put('/professional/updateAnswer/:id',verifyToken,AnswerController.updateAnswer);
 
-/**
- * @api {post} /student/addinfo Request User information
- * @apiName ProfileStudent
- * @apiGroup Professional
- *
 
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
- */
 
  /**
- * @api {post} /student/addinfo Request User information
+ * @api {get} /professional/getTrainingcenter/:companyName Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -603,7 +593,7 @@ router.put('/professional/updateAnswer/:id',verifyToken,AnswerController.updateA
 router.get('/professional/getTrainingcenter/:companyName',verifyToken,TrainingCenterController.getTrainingcenterByName);
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /professional/getTrainingcenter Request User information
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
@@ -622,7 +612,7 @@ router.get('/professional/getTrainingcenter',verifyToken,TrainingCenterControlle
 
 
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /trainingcenter/profile Request User information
  * @apiName ProfileStudent
  * @apiGroup TrainingCenter
  *
@@ -636,7 +626,7 @@ router.get('/professional/getTrainingcenter',verifyToken,TrainingCenterControlle
 
 router.get('/trainingcenter/profile',verifyToken,TrainingCenterController.profile);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /trainingcenter/:companyName Request User information
  * @apiName ProfileStudent
  * @apiGroup TrainingCenter
  *
@@ -649,7 +639,7 @@ router.get('/trainingcenter/profile',verifyToken,TrainingCenterController.profil
  */
 router.get('/trainingcenter/:companyName',verifyToken,TrainingCenterController.getTrainingcenterByName);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /trainingcenter/addInfo Request User information
  * @apiName ProfileStudent
  * @apiGroup TrainingCenter
  *
@@ -662,7 +652,7 @@ router.get('/trainingcenter/:companyName',verifyToken,TrainingCenterController.g
  */
 router.post('/trainingcenter/addInfo',verifyToken,TrainingCenterController.addInfo);
 /**
- * @api {post} /student/addinfo Request User information
+ * @api {post} /trainigcenter/editProfile Request User information
  * @apiName ProfileStudent
  * @apiGroup TrainingCenter
  *
@@ -688,11 +678,6 @@ router.put('/trainigcenter/editProfile',verifyToken,TrainingCenterController.edi
  */
 
 // router.delete('/trainingcenter/deleteprofile',verifyToken,TrainingCenterController)
-
-
-
-
-
 
 
 
