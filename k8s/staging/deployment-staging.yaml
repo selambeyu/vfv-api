@@ -5,26 +5,26 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: sample-service
-      role: sample
+      app: vfv
+      role: api
   replicas: 1
   template:
     metadata:
       name: api-deployment
       labels:
-        app: sample-service
-        role: sample
+        app: vfv
+        role: api
         env: staging
     spec:
       containers:
-      - name: sample
-        image: gcr.io/th-fnote/sample:1.0.0
+      - name: node-app
+        image: gcr.io/th-fnote/vfv:1.0.0
         env:
           - name: MONGODB_URL
             valueFrom:
               secretKeyRef:
                 name: mongo-secret
-                key: MONGODB_URL
+                key: MONGOLAB_URI
          # - name: API_URL
           #  valueFrom:
           #    secretKeyRef:
