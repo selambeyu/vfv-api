@@ -11,7 +11,7 @@ module.exports.addInfo=(req,res)=>{
         }else{
             if(authData.role==="trainingcenter"){
                 trainingcenteinfo=new Trainingcenter({
-                    userId:authData.user._id,
+                    userId:authData._id,
                     companyName:req.body.companyName,
                     logo:res.body.file,
                     city:req.body.city,
@@ -80,7 +80,7 @@ module.exports.getTrainingcenterByName=(req,res)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            if(authData.user.role==="trainingcenter"){
+            if(authData.role==="trainingcenter"){
                 Trainingcenter.findOne({companyName:req.params.companyName}).then(result=>{
                         res.json({
                             result:result
@@ -122,7 +122,7 @@ module.exports.profile=(req,res)=>{
             res.sendStatus(403);
         }else{
             Trainingcenter.find({_id:req.params.id}).then(result=>{
-                if(authData.user._id===result.userId){
+                if(authData._id===result.userId){
                     res.json({
                         result:result
                     })
