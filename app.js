@@ -26,7 +26,15 @@ next();
 
 
 var app = express();
+var server=express.Router();
 
+server.get('/',(req,res)=>{
+  res.send("It is working");
+});
+
+app.get('/',(req,res)=>{
+  res.send("it is working ");
+});
 
 app.use(checkuserType);
 // view engine setup
