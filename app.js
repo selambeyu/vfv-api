@@ -26,14 +26,32 @@ next();
 
 
 var app = express();
-var server=express.Router();
+// var server=express.Router();
 
-server.get('/',(req,res)=>{
-  res.send("It is working");
-});
+// server.get('/',(req,res)=>{
+//   res.send("It is working");
+// });
 
 app.get('/',(req,res)=>{
+  console("work");
   res.send("it is working ");
+});
+
+
+app.use((req, res, next) => {
+  // Control access to clients
+  res.header('Access-Control-Allow-Origin', '*');
+
+  // Control allowed headers
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+  if(req.method == 'OPTIONS') {
+    // Set allowed HTTP methods
+    req.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    return res.status(200).json({})
+  }
+
+  next();
 });
 
 app.use(checkuserType);
