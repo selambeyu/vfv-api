@@ -32,10 +32,7 @@ var app = express();
 //   res.send("It is working");
 // });
 
-app.get('/',(req,res)=>{
-  console("work");
-  res.send("it is working ");
-});
+
 
 
 app.use((req, res, next) => {
@@ -75,7 +72,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
+app.get('/',(req,res)=>{
+  console("work");
+  res.send("it is working ");
+});
 app.use('/api/users', usersRouter);
 // app.use('/api/admin',indexRouter);
 app.use('/api/admin',adminRouter);
