@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "mocha ./test/*.js --recursive --timeout 8000 --exit",
-    "docs":"apidoc -i server/routes/ -o apidoc"
+    "docs":"apidoc -i server/routes/ -o apidoc/"
   },
   "dependencies": {
     "admin-lte-express": "^1.4.2",

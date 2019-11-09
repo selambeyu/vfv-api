@@ -169,24 +169,24 @@ router.get('/student/profile',verifyToken,StudentController.profile);
  * @apiSuccess {String} firstname Firstname of the Student.
  * @apiSuccess {String} lastname  Lastname of the Student.
  * @apiSuccess {String} interest  Interest of the Student.
- *@apiSuccess {String} address  Address of the Stident.
+ * @apiSuccess {String} address  Address of the Stident.
  */
 router.post('/student/addInfo',verifyToken,StudentController.addInfo);
 /**
  * @api {put} /student/editprofile/:id Request User information
  * @apiName ProfileStudent
  * @apiGroup Student
- * @apiParam {String} id unique id.
- *@apiParam {String} firsname Students .
- *@apiParam {String} last Students .
- * @apiParam {String} addres of Students .
- * @apiParam {String} interest Students .
+ * @apiParams {String} id unique id.
+ * @apiParams {String} firsname Students .
+ * @apiParams {String} last Students .
+ * @apiParams {String} addres of Students .
+ * @apiParams {String} interest Students .
 
  *
  * @apiSuccess {String} firstname Firstname of the Student.
  * @apiSuccess {String} lastname  Lastname of the Student.
  * @apiSuccess {String} interest Interes   of the Student.
- *@apiSuccess {String} address   Adderes of the Student.
+ * @apiSuccess {String} address   Adderes of the Student.
  */
 router.put('/student/editprofile/:id',verifyToken,StudentController.editProfile);
 /**
@@ -236,8 +236,8 @@ router.post('/student/createQuestion',verifyToken,QuestionController.createQuest
  * @apiName updateQuestion
  * @apiGroup Student
  *
-*@apiParam {String } id of the question
-*@apiParam {String } question of the student
+* @apiParams {String } id of the question
+* @apiParams {String } question of the student
  *
  * @apiSuccess {String} Question of the Student.
  * @apiSuccess {bollean} succes=true  Success message.
@@ -275,7 +275,7 @@ router.delete('/student/deleteQuestion/:id',verifyToken,QuestionController.delet
  * @apiName getArticleByAuthor
  * @apiGroup Student
  *
-*@apiParams {String} author of the Article.
+* @apiParams {String} author of the Article.
  *
  * @apiSuccess {String} title  of the Article.
  * @apiSuccess {String} content   of the Article.
@@ -288,7 +288,7 @@ router.get('/student/ArticleByAuthor/:author',verifyToken,ArticelController.getB
  * @apiName GetArticleByTitle
  * @apiGroup Student
  *
-*@apiParams {String} title of the article
+* @apiParams {String} title of the article
  *
  * @apiSuccess {String} author of the Ariticle.
  * @apiSuccess {String} content  of the Article.
@@ -318,7 +318,7 @@ router.get('/student/gettrainingcenter/:companyName',verifyToken,TrainingCenterC
  * @apiSuccess {String} companyName  of the Trainigcenter.
  * @apiSuccess {String} city   of the Trainigcenter.
  * @apiSuccess {String} compayDescription   of the Trainingcenter.
- *@apiSuccess {String} trainingType   of the Trainigcenter.
+ * @apiSuccess {String} trainingType   of the Trainigcenter.
  */
 router.get('/student/gettrainingceneter',verifyToken,TrainingCenterController.getTrainingcenter);
 
@@ -333,8 +333,8 @@ router.get('/student/gettrainingceneter',verifyToken,TrainingCenterController.ge
  * @apiSuccess {String} firstname Firstname of the User.
  * @apiSuccess {String} lastname  Lastname of the User.
  * @apiSuccess {String} professionType  Lastname of the User.
- *@apiSuccess {String} professionType  Lastname of the User.
- *@apiSuccess {String} college Firstname of the User.
+ * @apiSuccess {String} professionType  Lastname of the User.
+ * @apiSuccess {String} college Firstname of the User.
  * @apiSuccess {String} lastname  Lastname of the User.
  * @apiSuccess {String} highschool  Lastname of the User.
  *
@@ -346,18 +346,18 @@ router.get('/professional/profile',verifyToken,ProfessionalController.profile);
  * @apiName ProfileStudent
  * @apiGroup Professional
  *
-*@apiParams {String} firstname of the professional
-*@apiParams {String} lastname of the professional
-*@apiParams {String} professionType of the professional
-*@apiParams {String} address of the professional
-*@apiParams {String} college of the professional
-*@apiParams {String} WorkPlace of the professional
+* @apiParams {String} firstname of the professional
+* @apiParams {String} lastname of the professional
+* @apiParams {String} professionType of the professional
+* @apiParams {String} address of the professional
+* @apiParams {String} college of the professional
+* @apiParams {String} WorkPlace of the professional
                     
  * @apiSuccess {String} firstname  of the professionl.
  * @apiSuccess {String} lastname   of the professional.
  * @apiSuccess {String} professionType   of the professional.
- *@apiSuccess {String} college   of the professional.
- *@apiSuccess {String} WorkPlace   of the professional.
+ * @apiSuccess {String} college   of the professional.
+ * @apiSuccess {String} WorkPlace   of the professional.
  
  */
 router.post('/professional/addInfo',verifyToken,ProfessionalController.addInfo);
@@ -366,7 +366,7 @@ router.post('/professional/addInfo',verifyToken,ProfessionalController.addInfo);
  * @apiName professionalProfile
  * @apiGroup Professional
  * 
- *@apiSuccessExample Success-Response:
+ * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *      success:true,
  *      "message":"udpdated"
@@ -391,11 +391,11 @@ router.put('/professional/editProfile/:id',verifyToken,ProfessionalController.ed
  * @apiGroup Professional
  * 
  * 
- *@apiParams {String} title of the article
- *@apiParams {String} Content of the article
+ * @apiParams {String} title of the article
+ * @apiParams {String} Content of the article
 
 
- *@apiSuccessExample Success-Response:
+ * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *      success:true,
  *      "message":"created"
@@ -424,7 +424,7 @@ router.post('/professional/addArticle',verifyToken,ArticelController.addArticle)
  * @apiSuccess {String} title  of the Article.
  * @apiSuccess {String} content   of the Article.
  * @apiSuccess {String} author   of the Artilc.
- *@apiSuccess {Date} createDat   of the Article.
+ * @apiSuccess {Date} createDat   of the Article.
  */
 router.get('/professional/viewArticle',verifyToken,ArticelController.getArticle);
 /**
@@ -523,9 +523,9 @@ router.get('/professional/articleByAuthor/:author',verifyToken,ArticelController
  *
 
  *
- * @apiSuccess {String} author Firstname of the User.
- * @apiSuccess {String} title  Lastname of the User.
- * @apiSuccess {String} content  Lastname of the User.
+ * @apiSuccess {String} author of the Article.
+ * @apiSuccess {String} title   of the Artilce.
+ * @apiSuccess {String} content   of the Article.
  *
  */
 router.get('/professional/articleByTitle/:title',verifyToken,ArticelController.getByTitle);
@@ -550,43 +550,58 @@ router.get('/professional/viewAnswer',verifyToken,AnswerController.viewAnswer);
  * @apiGroup Professional
  * 
  * 
- *@apiParams {String} 
+ * @apiParams {String} Answer  
+ * @apiParams {String} Id of the question  
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} Answer of the Professional.
+ * @apiSuccess {String} answeredBy  the Professional.
+ * 
  */
 router.post('/professional/answerQuestion/:id',verifyToken,AnswerController.answerQuestion);
 
 /**
- * @api {post} /professional/updateAnswer/:id' Request User information
- * @apiName ProfileStudent
+ * @api {put} /professional/updateAnswer/:id' Update ansewer information
+ * @apiName UpdataeAnswer
  * @apiGroup Professional
  *
 
+* @apiParams {id} the id of the answer which is unique
+
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      success:true,
+ *      "message":"Updated"
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ *  @apiError Answerupdated
+ *
+ * @apiErrorExample Error-Response:
+ *    
+ *     {
+ *       "success":false,
+ *         "result":err
+ *     }
+ *
+ *
+ * @apiSuccess {String} answer  of the Professional.
+ *
  */
 router.put('/professional/updateAnswer/:id',verifyToken,AnswerController.updateAnswer);
 
 
 
  /**
- * @api {get} /professional/getTrainingcenter/:companyName Request User information
- * @apiName ProfileStudent
+ * @api {get} /professional/getTrainingcenter/:companyName Trainingcenter information
+ * @apiName getTrainingCenterBycompanyName
  * @apiGroup Professional
  *
-
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ *
+ * @apiSuccess {String} companyName  of the Trainingcenter.
+ * @apiSuccess {String} logo   of the Trainningcenter
+ * @apiSuccess {String} city   of the Trainigcenter.
+ * @apiSuccess {String} compayDescription   of the Trainigcenter.
+ * @apiSuccess {String} trainingType   of the Trainingcenter.
  */
 // router.delete('/professional/deleteAnswer/:id',verifyToken,AnswerController);
 
@@ -594,61 +609,66 @@ router.get('/professional/getTrainingcenter/:companyName',verifyToken,TrainingCe
 
 /**
  * @api {post} /professional/getTrainingcenter Request User information
- * @apiName ProfileStudent
+ * @apiName GetTrainingcenter
  * @apiGroup Professional
  *
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} companyName  of the Trainingcenter.
+ * @apiSuccess {String} logo   of the Trainningcenter
+ * @apiSuccess {String} city   of the Trainigcenter.
+ * @apiSuccess {String} compayDescription   of the Trainigcenter.
+ * @apiSuccess {String} trainingType   of the Trainingcenter.
  */
 router.get('/professional/getTrainingcenter',verifyToken,TrainingCenterController.getTrainingcenter);
-
-
-
-
-
-
 /**
- * @api {post} /trainingcenter/profile Request User information
- * @apiName ProfileStudent
+ * @api {post} /trainingcenter/profile Trainigcentr information
+ * @apiName TrainigcentrProfile
  * @apiGroup TrainingCenter
  *
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} companyName  of the Trainingcenter.
+ * @apiSuccess {String} logo   of the Trainningcenter
+ * @apiSuccess {String} city   of the Trainigcenter.
+ * @apiSuccess {String} compayDescription   of the Trainigcenter.
+ * @apiSuccess {String} trainingType   of the Trainingcenter.
  */
 
 router.get('/trainingcenter/profile',verifyToken,TrainingCenterController.profile);
 /**
  * @api {post} /trainingcenter/:companyName Request User information
- * @apiName ProfileStudent
+ * @apiName getTrainingcentrbycompanyname
  * @apiGroup TrainingCenter
  *
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} companyName  of the Trainingcenter.
+ * @apiSuccess {String} logo   of the Trainningcenter
+ * @apiSuccess {String} city   of the Trainigcenter.
+ * @apiSuccess {String} compayDescription   of the Trainigcenter.
+ * @apiSuccess {String} trainingType   of the Trainingcenter.
  */
 router.get('/trainingcenter/:companyName',verifyToken,TrainingCenterController.getTrainingcenterByName);
 /**
  * @api {post} /trainingcenter/addInfo Request User information
- * @apiName ProfileStudent
+ * @apiName addProfileInfoTrainingcenter
  * @apiGroup TrainingCenter
+ *
+* @apiParams {String} companyName  of the Trainingcenter.
+ * @apiParams {String} logo   of the Trainningcenter
+ * @apiParams {String} city   of the Trainigcenter.
+ * @apiParams {String} compayDescription   of the Trainigcenter.
+ * @apiParams {String} trainingType   of the Trainingcenter.
+
  *
 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} companyName  of the Trainingcenter.
+ * @apiSuccess {String} logo   of the Trainningcenter
+ * @apiSuccess {String} city   of the Trainigcenter.
+ * @apiSuccess {String} compayDescription   of the Trainigcenter.
+ * @apiSuccess {String} trainingType   of the Trainingcenter.
  */
 router.post('/trainingcenter/addInfo',verifyToken,TrainingCenterController.addInfo);
 /**
@@ -656,29 +676,15 @@ router.post('/trainingcenter/addInfo',verifyToken,TrainingCenterController.addIn
  * @apiName ProfileStudent
  * @apiGroup TrainingCenter
  *
-
+* @apiParams {String} Id  of the Trainingcenter.
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
+ * @apiSuccess {String} companyName  of the Trainingcenter.
+ * @apiSuccess {String} logo   of the Trainningcenter
+ * @apiSuccess {String} city   of the Trainigcenter.
+ * @apiSuccess {String} compayDescription   of the Trainigcenter.
+ * @apiSuccess {String} trainingType   of the Trainingcenter.
  */
 router.put('/trainigcenter/editProfile',verifyToken,TrainingCenterController.editProfile);
-/**
- * @api {post} /student/addinfo Request User information
- * @apiName ProfileStudent
- * @apiGroup TrainingCenter
- *
-
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- * @apiSuccess {String} bio  Lastname of the User.
- *@apiSuccess {String} city  Lastname of the User.
- */
-
-// router.delete('/trainingcenter/deleteprofile',verifyToken,TrainingCenterController)
-
 
 
 module.exports=router
